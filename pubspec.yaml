@@ -2,7 +2,7 @@ name: mini_widget
 description: A new Flutter package.
 version: 0.0.1
 author: yshye <yshye824252187@163.com>
-homepage:
+homepage: https://github.com/yshye/mini_widget.git
 
 environment:
     sdk: ">=2.1.0 <3.0.0"
