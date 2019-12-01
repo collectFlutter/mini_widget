@@ -13,7 +13,11 @@ class ArcPainter extends BasePainter {
   final double sweepAngle;
 
   /// 默认是画圆
-  ArcPainter({this.startAngle = 0.0, this.sweepAngle = 360.0, Color color = Colors.blue, double strokeWidth = 1})
+  ArcPainter(
+      {this.startAngle = 0.0,
+      this.sweepAngle = 360.0,
+      Color color = Colors.blue,
+      double strokeWidth = 1})
       : super(color: color, strokeWidth: strokeWidth);
 
   @override
@@ -22,6 +26,7 @@ class ArcPainter extends BasePainter {
     Offset center = Offset(size.width * 0.5, size.height * 0.5);
 
     Rect rect = Rect.fromCircle(center: center, radius: radius);
-    canvas.drawArc(rect, startAngle * rad, sweepAngle * rad, false, customPaint);
+    canvas.drawArc(
+        rect, startAngle * rad, sweepAngle * rad, false, customPaint);
   }
 }

@@ -41,15 +41,18 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               _buildItem(FiveStarWidget(50)),
               _buildItem(FiveStarWidget(50, rotateAngle: 30)),
-              _buildItem(FiveStarWidget(50, rotateAngle: 60, color: Colors.blue)),
-              _buildItem(FiveStarWidget(50, rotateAngle: 90, color: Colors.blue)),
+              _buildItem(
+                  FiveStarWidget(50, rotateAngle: 60, color: Colors.blue)),
+              _buildItem(
+                  FiveStarWidget(50, rotateAngle: 90, color: Colors.blue)),
               _buildItem(FiveStarWidget(50, rotateAngle: 120)),
               _buildItem(FiveStarWidget(50, rotateAngle: 140)),
               _buildItem(ArcWidget(50, color: Colors.red)),
               _buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 90.0)),
               _buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 180.0)),
               _buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 270.0)),
-              _buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 300.0, color: Colors.red)),
+              _buildItem(ArcWidget(50,
+                  startAngle: 0.0, sweepAngle: 300.0, color: Colors.red)),
               _buildItem(PointWidget([
                 Offset(0.0, 0.0),
                 Offset(0.0, 10.0),
@@ -160,5 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-  Widget _buildItem(Widget child) => Container(color: Colors.white, child: child);
+  Widget _buildItem(Widget child) =>
+      Container(color: Colors.white, child: child);
 }
