@@ -20,14 +20,22 @@ class ArcWidget extends BaseWidget {
   /// [color] - 颜色 <br/>
   /// [strokeWidth] - 画笔粗细
   ArcWidget(this.diameter,
-      {this.startAngle = 0.0, this.sweepAngle = 360.0, Color color = Colors.blue, double strokeWidth = 1.0})
-      : super(color: color, width: diameter, height: diameter, strokeWidth: strokeWidth);
+      {this.startAngle = 0.0,
+      this.sweepAngle = 360.0,
+      Color color = Colors.blue,
+      double strokeWidth = 1.0})
+      : super(
+            color: color,
+            width: diameter,
+            height: diameter,
+            strokeWidth: strokeWidth);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(diameter, diameter),
-      painter: ArcPainter(color: color, startAngle: startAngle, sweepAngle: sweepAngle),
+      painter: ArcPainter(
+          color: color, startAngle: startAngle, sweepAngle: sweepAngle),
     );
   }
 }

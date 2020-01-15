@@ -18,7 +18,9 @@ abstract class BasePainter extends CustomPainter {
   // 画笔
   Paint customPaint;
 
-  BasePainter({this.color, this.rotateAngle, this.strokeWidth = 1, Listenable repaint}) : super(repaint: repaint) {
+  BasePainter(
+      {this.color, this.rotateAngle, this.strokeWidth = 1, Listenable repaint})
+      : super(repaint: repaint) {
     customPaint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth
@@ -34,11 +36,13 @@ abstract class BasePainter extends CustomPainter {
     // 计算画布中心点初始弧度
     double startAngle = atan(height / width);
     // 计算画布初始中心点坐标
-    Point p0 = Point(panelRadius * cos(startAngle), panelRadius * sin(startAngle));
+    Point p0 =
+        Point(panelRadius * cos(startAngle), panelRadius * sin(startAngle));
     // 需要旋转的弧度
     double radian = rotateAngle * rad;
     // 计算旋转后的画布中心点坐标
-    Point px = Point(panelRadius * cos(radian + startAngle), panelRadius * sin(radian + startAngle));
+    Point px = Point(panelRadius * cos(radian + startAngle),
+        panelRadius * sin(radian + startAngle));
 
     // 先平移画布
     canvas.translate((p0.x - px.x) / 2, (p0.y - px.y) / 2);

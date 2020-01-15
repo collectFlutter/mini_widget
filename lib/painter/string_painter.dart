@@ -21,6 +21,7 @@ class StringPainter extends BasePainter {
       Color color = Colors.black,
       double rotateAngle = 0.0})
       : super(color: color, rotateAngle: rotateAngle);
+
   @override
   void paint(Canvas canvas, Size size) {
     ui.ParagraphBuilder pb = ui.ParagraphBuilder(ui.ParagraphStyle(

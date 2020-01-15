@@ -6,7 +6,8 @@ import 'base_painter.dart';
 class PointPainter extends BasePainter {
   final List<Offset> points;
 
-  PointPainter(this.points, {Color color = Colors.red, double strokeWidth = 1.0})
+  PointPainter(this.points,
+      {Color color = Colors.red, double strokeWidth = 1.0})
       : super(color: color, strokeWidth: strokeWidth);
 
   @override
