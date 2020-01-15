@@ -7,13 +7,20 @@ class BashBoardWidget extends BaseWidget {
   /// 直径
   final double diameter;
 
-  BashBoardWidget(this.diameter, {Color color = Colors.blue, double strokeWidth = 1.0})
-      : super(color: color, width: diameter, height: diameter, strokeWidth: strokeWidth);
+  /// 刻度值[0-1]
+  final double value;
+
+  /// 指标名称(最多4个字)
+  final String label;
+
+  BashBoardWidget(this.diameter,
+      {this.value = 0.0, this.label = '', Color color = Colors.blue, double strokeWidth = 10.0})
+      :super(color: color, width: diameter, height: diameter, strokeWidth: strokeWidth);
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(diameter, diameter),
-      painter: DashBoardPainter(color: color, strokeWidth: strokeWidth),
+      painter: DashBoardPainter(color: color, strokeWidth: strokeWidth,label: label,value: value),
     );
   }
 }

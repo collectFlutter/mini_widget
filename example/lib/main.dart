@@ -1,158 +1,173 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_widget/mini_widget.dart';
+
+import 'time_clock_page.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'mini_widget demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'MiniWidget 测试页面'),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(home: MyHomePage());
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime datetime;
-  Timer timer;
+  List<Widget> items = [];
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [];
-//    initArcWidgets(items);
-//    initFiveWidgets(items);
-//    initStateWidgets(items);
-//    initStringWidget(items);
-    initClockWidget(items);
-    items.add(_buildItem(BashBoardWidget(100,strokeWidth: 5)));
-
+    items.clear();
+    initBashBoarWidget();
+    initClockWidget();
+    initArcWidgets();
+    initFiveWidgets();
+    initStateWidgets();
+    initStringWidget();
     return Scaffold(
-        appBar: AppBar(title: Text(widget.title)),
+        appBar: AppBar(title: Text("MiniWidget 测试页面")),
         backgroundColor: Colors.grey[300],
         body: SingleChildScrollView(
-          child: Wrap(spacing: 3, runSpacing: 3, children: items),
+          child: Column(children: items),
         ));
   }
 
-  void initClockWidget(List<Widget> items) {
-    datetime = DateTime.now();
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      datetime = DateTime.now();
-      setState(() {});
-    });
-    items.add(_buildItem(ClockWidget(datetime, height: 200, width: 200)));
+  void initBashBoarWidget() {
+    items.add(_buildItem("仪表盘", BashBoardWidget(150, strokeWidth: 10,label: '收缴率',value: 0.68,)));
   }
 
-  void initStringWidget(List<Widget> items) {
-    items.add(_buildItem(Stack(
-      children: <Widget>[
-        StringWidget(
-          "↖",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.left,
-          verticalAlign: VerticalAlign.top,
-        ),
-        StringWidget(
-          "↑",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.center,
-          verticalAlign: VerticalAlign.top,
-        ),
-        StringWidget(
-          "↗",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.right,
-          verticalAlign: VerticalAlign.top,
-        ),
-        StringWidget(
-          "←",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.left,
-          verticalAlign: VerticalAlign.center,
-        ),
-        StringWidget(
-          "+",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.center,
-          verticalAlign: VerticalAlign.center,
-        ),
-        StringWidget(
-          "→",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.right,
-          verticalAlign: VerticalAlign.center,
-        ),
-        StringWidget(
-          "↙",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.left,
-          verticalAlign: VerticalAlign.bottom,
-        ),
-        StringWidget(
-          "↓",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.center,
-          verticalAlign: VerticalAlign.bottom,
-        ),
-        StringWidget(
-          "↘",
-          width: 100,
-          height: 100,
-          horizontalTextAlign: TextAlign.right,
-          verticalAlign: VerticalAlign.bottom,
-        )
-      ],
-    )));
+  void initClockWidget() {
+    items.add(_buildItem("时钟", TimeClockPage()));
   }
 
-  void initStateWidgets(List<Widget> items) {
+  void initStringWidget() {
+    items.add(_buildItem(
+        "旋转字符串",
+        Stack(
+          children: <Widget>[
+            StringWidget(
+              "↖",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.left,
+              verticalAlign: VerticalAlign.top,
+            ),
+            StringWidget(
+              "↑",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.center,
+              verticalAlign: VerticalAlign.top,
+            ),
+            StringWidget(
+              "↗",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.right,
+              verticalAlign: VerticalAlign.top,
+            ),
+            StringWidget(
+              "←",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.left,
+              verticalAlign: VerticalAlign.center,
+            ),
+            StringWidget(
+              "+",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.center,
+              verticalAlign: VerticalAlign.center,
+            ),
+            StringWidget(
+              "→",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.right,
+              verticalAlign: VerticalAlign.center,
+            ),
+            StringWidget(
+              "↙",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.left,
+              verticalAlign: VerticalAlign.bottom,
+            ),
+            StringWidget(
+              "↓",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.center,
+              verticalAlign: VerticalAlign.bottom,
+            ),
+            StringWidget(
+              "↘",
+              width: 100,
+              height: 100,
+              horizontalTextAlign: TextAlign.right,
+              verticalAlign: VerticalAlign.bottom,
+            )
+          ],
+        )));
+  }
+
+  void initStateWidgets() {
     items
-      ..add(_buildItem(StateWidget("进行中", color: Colors.blue, size: 60)))
-      ..add(_buildItem(StateWidget("已删除", color: Colors.red, size: 100, fontSize: 18)))
-      ..add(_buildItem(StateWidget("已完成", color: Colors.green, size: 180, fontSize: 38)));
+      ..add(_buildItem(
+          "状态图标",
+          Wrap(
+            children: <Widget>[
+              StateWidget("进行中", color: Colors.blue, size: 60),
+              StateWidget("已删除", color: Colors.red, size: 100, fontSize: 18),
+              StateWidget("已完成", color: Colors.green, size: 180, fontSize: 38)
+            ],
+          )));
   }
 
-  void initFiveWidgets(List<Widget> items) {
+  void initFiveWidgets() {
     items
-      ..add(_buildItem(FiveStarWidget(50)))
-      ..add(_buildItem(FiveStarWidget(50, rotateAngle: 30)))
-      ..add(_buildItem(FiveStarWidget(50, rotateAngle: 60, color: Colors.blue)))
-      ..add(_buildItem(FiveStarWidget(50, rotateAngle: 90, color: Colors.blue)))
-      ..add(_buildItem(FiveStarWidget(50, rotateAngle: 120)))
-      ..add(_buildItem(FiveStarWidget(50, rotateAngle: 140)));
+      ..add(_buildItem(
+          "五角星",
+          Wrap(
+            children: <Widget>[
+              FiveStarWidget(50),
+              FiveStarWidget(50, rotateAngle: 30),
+              FiveStarWidget(50, rotateAngle: 60, color: Colors.blue),
+              FiveStarWidget(50, rotateAngle: 90, color: Colors.blue),
+              FiveStarWidget(50, rotateAngle: 120),
+              FiveStarWidget(50, rotateAngle: 140)
+            ],
+          )));
   }
 
-  void initArcWidgets(List<Widget> items) {
+  void initArcWidgets() {
     items
-      ..add(_buildItem(ArcWidget(50, color: Colors.red)))
-      ..add(_buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 90.0)))
-      ..add(_buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 180.0)))
-      ..add(_buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 270.0)))
-      ..add(_buildItem(ArcWidget(50, startAngle: 0.0, sweepAngle: 300.0, color: Colors.red)));
+      ..add(_buildItem(
+          "圆弧、圆",
+          Wrap(
+            children: <Widget>[
+              ArcWidget(50, color: Colors.red),
+              ArcWidget(50, startAngle: 0.0, sweepAngle: 90.0),
+              ArcWidget(50, startAngle: 0.0, sweepAngle: 180.0),
+              ArcWidget(50, startAngle: 0.0, sweepAngle: 270.0),
+              ArcWidget(50, startAngle: 0.0, sweepAngle: 300.0, color: Colors.red)
+            ],
+          )));
   }
 
-  Widget _buildItem(Widget child) => Container(color: Colors.white, child: child);
+  Widget _buildItem(String title, Widget widget) =>
+      ListTile(title: Text(title ?? ''), onTap: () => gotoPage(widget, title));
+
+  void gotoPage(Widget widget, String title) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (ctx) => Scaffold(
+              appBar: AppBar(
+                title: Text(title ?? ''),
+              ),
+              body: widget)));
 }
