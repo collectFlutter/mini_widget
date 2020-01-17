@@ -68,20 +68,16 @@ class ClockPainter extends BasePainter {
           //draw number
           canvas.save();
           canvas.translate(0.0, -radius + borderWidth * 4);
-          textPainter.text = new TextSpan(
+          textPainter.text = TextSpan(
             text: "${(i ~/ 5) == 0 ? "12" : (i ~/ 5)}",
-            style: TextStyle(
-              color: numberColor,
-              fontFamily: 'Times New Roman',
-              fontSize: 28.0 * scale,
-            ),
+            style: TextStyle(color: numberColor, fontFamily: 'Times  Roman', fontSize: 28.0 * scale),
           );
 
           //helps make the text painted vertically
           canvas.rotate(-angle * i);
 
           textPainter.layout();
-          textPainter.paint(canvas, new Offset(-(textPainter.width / 2), -(textPainter.height / 2)));
+          textPainter.paint(canvas, Offset(-(textPainter.width / 2), -(textPainter.height / 2)));
           canvas.restore();
         }
         canvas.rotate(angle);

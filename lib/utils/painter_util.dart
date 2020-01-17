@@ -1,101 +1,160 @@
 import 'dart:math';
 
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../mini_widget.dart';
+// 1度对应的弧度
+final double rad = pi / 180.0;
 
-/// TODO 待开发
+/// 绘制工具
 class PainterUtil {
-  // 1度对应的弧度
-  static final double rad = pi / 180.0;
+  /// 绘制线段
+  ///
+  static void paintLine(
+    Canvas canvas,
+    double startX,
+    double endX, {
+    Offset center = const Offset(0, 0),
+    Color color = Colors.red,
+    double rotateAngle = 0,
+    double strokeWidth = 1,
+  }) {
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(rotateAngle * rad);
+    canvas.drawLine(
+        Offset(startX, 0),
+        Offset(endX, 0),
+        Paint()
+          ..color = color
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = strokeWidth);
+    canvas.restore();
+  }
 
-  static paintText(
-      {@required Canvas canvas,
-      @required Paint paint,
-      @required String text,
-      @required Size size,
-      Offset center = const Offset(0.0, 0.0),
-      TextAlign horizontalTextAlign,
-      VerticalAlign verticalTextAlign,
-      double fontSize = 12,
-      Color color = Colors.black,
-      double rotateAngle = 0.0,
-      Offset rotateCanter = const Offset(0, 0)}) {
-    ui.ParagraphBuilder pb = ui.ParagraphBuilder(ui.ParagraphStyle(
-      textAlign: horizontalTextAlign,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-      fontSize: fontSize,
-    ));
-    pb.pushStyle(ui.TextStyle(color: color));
-    pb.addText(text);
-    ui.ParagraphConstraints pc = ui.ParagraphConstraints(width: size.width);
-    //这里需要先layout, 后面才能获取到文字高度
-    ui.Paragraph paragraph = pb.build()..layout(pc);
-    //文字居中显示
-    Offset offset = Offset(0.0, size.width * 0.5 - paragraph.height * 0.5);
-    if (verticalTextAlign == VerticalAlign.top) {
-      offset = Offset(0.0, 0.0);
-    } else if (verticalTextAlign == VerticalAlign.bottom) {
-      offset = Offset(0.0, size.width - paragraph.height);
-    }
-    rotate(
-        canvas: canvas,
-        center: rotateCanter,
-        rotateAngle: rotateAngle,
-        doPaint: () {
-          canvas.drawParagraph(paragraph, offset);
-        });
+  /// 绘制五角星<br/>
+  /// [center] 中心点 <br/>
+  /// [radius] 外接圆半径 <br/>
+  /// [color] 文本颜色 <br/>
+  /// [rotateAngle] 旋转角度 <br/>
+  static void paintFiveStart(
+    Canvas canvas,
+    Offset center,
+    double radius, {
+    Color color = Colors.red,
+    double rotateAngle = 0,
+  }) {
+    Offset p1 = Offset(0, -radius);
+    Offset p2 = Offset(radius * sin(pi * 0.4), -radius * cos(pi * 0.4));
+    Offset p3 = Offset(radius * sin(pi * 0.2), radius * cos(pi * 0.2));
+    Offset p4 = Offset(-radius * sin(pi * 0.2), radius * cos(pi * 0.2));
+    Offset p5 = Offset(-radius * sin(pi * 0.4), -radius * cos(pi * 0.4));
+    Path path = Path();
+    path.moveTo(p1.dx, p1.dy);
+    path.lineTo(p3.dx, p3.dy);
+    path.lineTo(p5.dx, p5.dy);
+    path.lineTo(p2.dx, p2.dy);
+    path.lineTo(p4.dx, p4.dy);
+    path.lineTo(p1.dx, p1.dy);
+
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(-rotateAngle);
+    // 绘制五角星
+    canvas.drawPath(
+        path,
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill);
+    // 恢复画布到上一个save状态
+    canvas.restore();
+  }
+
+  /// 绘制字符串 <br/>
+  /// [center] 绘制中点 <br/>
+  /// [text] 显示文本 <br/>
+  /// [fontSize] 文本大小 <br/>
+  /// [color] 文本颜色 <br/>
+  /// [rotateAngle] 旋转角度 <br/>
+  static void paintString(
+    Canvas canvas,
+    Offset center,
+    String text, {
+    double fontSize = 12,
+    Color color = Colors.black,
+    double rotateAngle = 0,
+  }) {
+    TextPainter textPainter = TextPainter(textAlign: TextAlign.center, textDirection: TextDirection.rtl);
+
+    // 绘制标题
+    textPainter.text =
+        TextSpan(text: text, style: TextStyle(color: color, fontFamily: 'Times New Roman', fontSize: fontSize));
+    textPainter.layout();
+    canvas.save();
+    canvas.rotate(-rotateAngle);
+    textPainter.paint(canvas, Offset(center.dx - textPainter.width * 0.5, center.dy - textPainter.height * 0.5));
+    canvas.restore();
   }
 
   /// 绘制圆弧<br/>
-  /// [canvas] - 画布 <br/>
-  /// [radius] - 圆弧半径 <br/>
-  /// [center] - 圆弧中心位置 <br/>
-  /// [startAngle] - 圆弧开始角度 <br/>
-  /// [sweepAngle] - 圆弧大小对应角度 <br/>
-  /// [paint] - 画笔
-  static paintArc({
-    @required Canvas canvas,
-    @required Paint paint,
-    double radius = 50,
-    Offset center = const Offset(0.0, 0.0),
+  /// [center] 圆心坐标<br/>
+  /// [radius] 半径<br/>
+  /// [startAngle] 开始角度 <br/>
+  /// [sweepAngle] 间隔角度 <br/>
+  /// [color] 画笔颜色 <br/>
+  /// [strokeWidth] 画笔宽度<br/>
+  static void paintArc(
+    Canvas canvas,
+    Offset center,
+    double radius, {
     double startAngle = 0.0,
     double sweepAngle = 360.0,
+    Color color = Colors.blue,
+    double strokeWidth = 1,
   }) {
     Rect rect = Rect.fromCircle(center: center, radius: radius);
-    canvas.drawArc(rect, startAngle * rad, sweepAngle * rad, false, paint);
+    canvas.drawArc(
+      rect,
+      startAngle * rad,
+      sweepAngle * rad,
+      false,
+      Paint()
+        ..color = color
+        ..strokeCap = StrokeCap.round
+        ..strokeWidth = strokeWidth
+        ..style = PaintingStyle.stroke,
+    );
   }
 
   /// 按照指定中心平移
-  static rotate(
-      {@required Canvas canvas,
-      Offset center = const Offset(.0, .0),
-      double rotateAngle = 0,
-      @required VoidCallback doPaint}) {
-    if (doPaint == null) return;
-    if (rotateAngle == 0 || center == Offset(.0, .0)) {
-      // 执行绘画
-      doPaint();
-      return;
-    }
-    double rotate = rotateAngle * rad;
-    // 先保存画布
-    canvas.save();
-    // 将画布中心平移到圆点
-    canvas.translate(-center.dx, -center.dy);
-    // 执行旋转
-    canvas.rotate(rotate);
-    // 执行绘画
-    doPaint();
-    // 恢复画布旋转
-    canvas.rotate(-rotate);
-    // 恢复平移前画布中心位置
-    canvas.translate(center.dx, center.dy);
-    // 恢复圆画布状态
-    canvas.restore();
-  }
+//  static rotate(
+//      {@required Canvas canvas,
+//      Offset center = const Offset(.0, .0),
+//      double rotateAngle = 0,
+//      @required VoidCallback doPaint}) {
+//    if (doPaint == null) return;
+//    if (rotateAngle == 0 || center == Offset(.0, .0)) {
+//      // 执行绘画
+//      doPaint();
+//      return;
+//    }
+//    double rotate = rotateAngle * rad;
+//    // 先保存画布
+//    canvas.save();
+//    // 将画布中心平移到圆点
+//    canvas.translate(center.dx, center.dy);
+//    // 执行旋转
+//    canvas.rotate(rotate);
+//    // 执行绘画
+//    doPaint();
+//    // 恢复画布旋转
+//    canvas.rotate(-rotate);
+//    // 恢复平移前画布中心位置
+//    canvas.translate(-center.dx, -center.dy);
+//    // 保存画布
+//    canvas.save();
+//    // 恢复圆画布状态
+//    canvas.restore();
+//  }
 }

@@ -36,7 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void initBashBoarWidget() {
-    items.add(_buildItem("仪表盘", BashBoardWidget(150, strokeWidth: 10,label: '收缴率',value: 0.68,)));
+    items.add(_buildItem(
+      "仪表盘",
+      ListView(children: <Widget>[
+        BashBoardWidget(100,
+            strokeWidth: 8, label: '收缴率', value: 68.23),
+        BashBoardWidget(300,
+            strokeWidth: 10, label: '出勤率', value: 100),
+        BashBoardWidget(MediaQuery.of(context).size.width,
+            strokeWidth: 20, label: '出租率', value: 35.33),
+      ],)
+
+    ));
   }
 
   void initClockWidget() {

@@ -1,11 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'base_painter.dart';
+import 'package:mini_widget/utils/painter_util.dart';
 
 /// 绘制弧线（默认是圆）
-class ArcPainter extends BasePainter {
+class ArcPainter extends CustomPainter {
+  /// 颜色
+  final Color color;
+
+  /// 画笔宽度
+  final double strokeWidth;
+
   /// 开始角度
   final double startAngle;
 
@@ -16,17 +21,25 @@ class ArcPainter extends BasePainter {
   ArcPainter(
       {this.startAngle = 0.0,
       this.sweepAngle = 360.0,
-      Color color = Colors.blue,
-      double strokeWidth = 1})
-      : super(color: color, strokeWidth: strokeWidth);
+      this.color = Colors.blue,
+      this.strokeWidth = 1});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double radius = min(size.width, size.height) * 0.5;
-    Offset center = Offset(size.width * 0.5, size.height * 0.5);
+    Offset _center = Offset(size.width * 0.5, size.height * 0.5);
+    double _radius = min(size.width, size.height) * 0.5;
 
-    Rect rect = Rect.fromCircle(center: center, radius: radius);
-    canvas.drawArc(
-        rect, startAngle * rad, sweepAngle * rad, false, customPaint);
+    PainterUtil.paintArc(
+      canvas,
+      _center,
+      _radius,
+      startAngle: startAngle,
+      sweepAngle: sweepAngle,
+      color: color,
+      strokeWidth: strokeWidth,
+    );
   }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
