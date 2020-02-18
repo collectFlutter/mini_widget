@@ -1,0 +1,1 @@
+export 'tab_view_bean.dart';

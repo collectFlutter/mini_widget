@@ -52,4 +52,8 @@ abstract class BasePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+
+  num degToRad(num deg) => deg * (pi / 180.0);
+
+  num radToDeg(num rad) => rad * (180.0 / pi);
 }

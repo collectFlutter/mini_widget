@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'package:mini_widget/mini_widget.dart';
 import 'package:mini_widget/widget/base_widget.dart';
+
+import 'arc_widget.dart';
+import 'five_star_widget.dart';
+import 'string_widget.dart';
 
 class StateWidget extends BaseWidget {
   final String label;

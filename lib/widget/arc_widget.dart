@@ -14,6 +14,15 @@ class ArcWidget extends BaseWidget {
   /// 间隔角度
   final double sweepAngle;
 
+  /// 圆环背景
+  final Color borderColor;
+
+  /// 中部的文字
+  final String middleLabel;
+
+  /// 上部的文字
+  final String aboveLabel;
+
   /// [diameter] - 直径 <br/>
   /// [startAngle] - 开始角度 <br/>
   /// [sweepAngle] - 间隔角度 <br/>
@@ -21,21 +30,27 @@ class ArcWidget extends BaseWidget {
   /// [strokeWidth] - 画笔粗细
   ArcWidget(this.diameter,
       {this.startAngle = 0.0,
+      this.borderColor = Colors.grey,
       this.sweepAngle = 360.0,
+      this.middleLabel,
+      this.aboveLabel,
       Color color = Colors.blue,
       double strokeWidth = 1.0})
-      : super(
-            color: color,
-            width: diameter,
-            height: diameter,
-            strokeWidth: strokeWidth);
+      : super(color: color, width: diameter, height: diameter, strokeWidth: strokeWidth);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(diameter, diameter),
       painter: ArcPainter(
-          color: color, startAngle: startAngle, sweepAngle: sweepAngle),
+        color: color,
+        startAngle: startAngle,
+        sweepAngle: sweepAngle,
+        strokeWidth: strokeWidth,
+        borderColor: borderColor,
+        middleLabel: middleLabel,
+        aboveLabel: aboveLabel,
+      ),
     );
   }
 }
