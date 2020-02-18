@@ -72,14 +72,14 @@ class PainterUtil {
   }
 
   /// 绘制字符串 <br/>
-  /// [center] 绘制中点 <br/>
+  /// [point] 绘制中点 <br/>
   /// [text] 显示文本 <br/>
   /// [fontSize] 文本大小 <br/>
   /// [color] 文本颜色 <br/>
   /// [rotateAngle] 旋转角度 <br/>
   static void paintString(
     Canvas canvas,
-    Offset center,
+    Offset point,
     String text, {
     double fontSize = 12,
     Color color = Colors.black,
@@ -93,7 +93,7 @@ class PainterUtil {
     textPainter.layout();
     canvas.save();
     canvas.rotate(-rotateAngle);
-    textPainter.paint(canvas, Offset(center.dx - textPainter.width * 0.5, center.dy - textPainter.height * 0.5));
+    textPainter.paint(canvas, Offset(point.dx - textPainter.width * 0.5, point.dy - textPainter.height * 0.5));
     canvas.restore();
   }
 

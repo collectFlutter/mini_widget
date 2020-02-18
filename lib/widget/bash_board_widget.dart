@@ -13,14 +13,14 @@ class BashBoardWidget extends BaseWidget {
   /// 指标名称(最多4个字)
   final String label;
 
-  /// 最大值颜色
-  final Color heightColor;
+  ///右侧颜色值
+  final Color rightColor;
 
   BashBoardWidget(this.diameter,
       {this.value = 0.0,
-      this.heightColor = Colors.blueAccent,
+      this.rightColor = Colors.blueAccent,
       this.label = '',
-      Color color = Colors.pinkAccent,
+      Color color = Colors.transparent,
       double strokeWidth = 10.0})
       : super(color: color, width: diameter, height: diameter, strokeWidth: strokeWidth);
   @override
@@ -28,7 +28,7 @@ class BashBoardWidget extends BaseWidget {
     return CustomPaint(
       size: Size(diameter, diameter),
       painter: DashBoardPainter(
-          color: color, strokeWidth: strokeWidth, label: label, value: value, heightColor: heightColor),
+          leftColor: color, strokeWidth: strokeWidth, label: label, value: value, rightColor: rightColor),
     );
   }
 }

@@ -17,10 +17,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var _progress = 70.0;
   List<Widget> items = [];
   @override
   Widget build(BuildContext context) {
     items.clear();
+    initWaveProgress();
     initBashBoarWidget();
     initClockWidget();
     initArcWidgets();
@@ -35,19 +37,41 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
+  void initWaveProgress() {
+    items.add(_buildItem(
+        "波浪进度",
+        ListView(
+          children: <Widget>[
+            WaveProgress(
+              100,
+              20,
+              label: '空置面积剩余',
+              subLabel: '5000㎡',
+            ),
+            WaveProgress(
+              300,
+              20,
+              label: '进度',
+            ),
+            WaveProgress(
+              MediaQuery.of(context).size.width,
+              70,
+              label: '出勤率',
+            ),
+          ],
+        )));
+  }
+
   void initBashBoarWidget() {
     items.add(_buildItem(
-      "仪表盘",
-      ListView(children: <Widget>[
-        BashBoardWidget(100,
-            strokeWidth: 8, label: '收缴率', value: 68.23),
-        BashBoardWidget(300,
-            strokeWidth: 10, label: '出勤率', value: 100),
-        BashBoardWidget(MediaQuery.of(context).size.width,
-            strokeWidth: 20, label: '出租率', value: 35.33),
-      ],)
-
-    ));
+        "仪表盘",
+        ListView(
+          children: <Widget>[
+            BashBoardWidget(100, strokeWidth: 8, label: '收缴率', value: 68.23),
+            BashBoardWidget(300, strokeWidth: 10, label: '出勤率', value: 100),
+            BashBoardWidget(MediaQuery.of(context).size.width, strokeWidth: 20, label: '出租率', value: 35.33),
+          ],
+        )));
   }
 
   void initClockWidget() {
@@ -161,11 +185,17 @@ class _MyHomePageState extends State<MyHomePage> {
           "圆弧、圆",
           Wrap(
             children: <Widget>[
+              ArcWidget(50,
+                  startAngle: 0.0, sweepAngle: 300.0, color: Colors.red, strokeWidth: 15, borderColor: Colors.grey[200]),
+              ArcWidget(100,
+                  startAngle: 0.0, sweepAngle: 90.0, color: Colors.red, strokeWidth: 15, borderColor: Colors.grey[200]),
+              ArcWidget(200,
+                  startAngle: 270.0, sweepAngle: 90.0, color: Colors.red, strokeWidth: 15, borderColor: Colors.grey[200]),
+              ArcWidget(300, startAngle: 0.0, sweepAngle: 360.0, color: Colors.red, strokeWidth: 10),
               ArcWidget(50, color: Colors.red),
               ArcWidget(50, startAngle: 0.0, sweepAngle: 90.0),
               ArcWidget(50, startAngle: 0.0, sweepAngle: 180.0),
               ArcWidget(50, startAngle: 0.0, sweepAngle: 270.0),
-              ArcWidget(50, startAngle: 0.0, sweepAngle: 300.0, color: Colors.red)
             ],
           )));
   }
