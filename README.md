@@ -1,16 +1,16 @@
 # mini_widget
 
-利用Dart绘制小组件
+Flutter 常用组件封装
 
-## 思路
-主要利用 canvas 进行绘制拼装
+
+[![](https://img.shields.io/pub/v/mini_widget#align=left&display=inline&height=20&originHeight=20&originWidth=76&status=done&style=none&width=76)](https://pub.flutter-io.cn/packages/mini_widget)  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/flutterme/mini_widget?style=flat-square)
 
 ## 安装:
 ```dart
 dependencies:
   flutter:
     sdk: flutter
-  mini_widget: ^0.0.1
+  mini_widget: ^0.1.0
 ```
 
 ## 使用：
