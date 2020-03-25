@@ -1,8 +1,7 @@
 name: mini_widget
-description: Flutter小组件.
-version: 0.0.1+1
-author: yshye<yshye2013@gmail.com>
-homepage: https://github.com/yshye/mini_widget.git
+description: Flutter base component package.
+version: 0.0.2
+homepage: https://github.com/flutterme/mini_widget.git
 
 environment:
     sdk: ">=2.1.0 <3.0.0"
