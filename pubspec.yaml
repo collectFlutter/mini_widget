@@ -1,6 +1,6 @@
 name: mini_widget
-description: Flutter base component package.
-version: 0.0.2
+description: Flutter base component package, For example InkCell, BlocProvider, etc.
+version: 0.0.3
 homepage: https://github.com/flutterme/mini_widget.git
 
 environment:
@@ -10,10 +10,20 @@ dependencies:
   flutter:
     sdk: flutter
 
+  keyboard_actions: ^2.1.2
+  material_design_icons_flutter: ^3.2.3895
+  url_launcher: ^5.1.1
+  mini_tools: ^0.1.2
+  cached_network_image: ^2.0.0-rc
+  # SVG 插件使用https://github.com/dnfield/flutter_svg
+  flutter_svg: ^0.13.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+#  mini_tools:
+#    path: ../mini_tools
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
