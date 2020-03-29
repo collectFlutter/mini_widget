@@ -7,4 +7,5 @@ export 'ink_cell.dart';
 export 'line_cell.dart';
 export 'search_cell.dart';
 export 'select_cell.dart';
+export 'tab_cell.dart';
 export 'text_cell.dart';
