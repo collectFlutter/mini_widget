@@ -12,16 +12,9 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      child: _tabBar,
-    );
-  }
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) =>
+      Container(color: Colors.white, child: _tabBar);
 
   @override
-  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
-    return false;
-  }
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) => false;
 }
