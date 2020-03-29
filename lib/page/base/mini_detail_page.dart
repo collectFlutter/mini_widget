@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_tools/mini_tools.dart';
-import '../res/a.dart';
+import '../../res/a.dart';
 
 abstract class MiniDetailPage extends StatelessWidget {
   @override

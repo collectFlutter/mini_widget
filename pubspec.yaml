@@ -19,6 +19,11 @@ dependencies:
   flutter_svg: ^0.13.1
   oktoast: ^2.2.0
   flutter_widget_from_html: ^0.3.1-rc
+  # 权限申请
+  permission_handler: ^3.2.0
+  amap_location_fluttify: ^0.6.0+acdcd89
+  # 等待对话框 https://github.com/jogboms/flutter_spinkit
+  flutter_spinkit: ^3.1.0
 
 dev_dependencies:
   flutter_test:
