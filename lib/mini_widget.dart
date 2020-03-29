@@ -6,5 +6,7 @@ export 'cell/a.dart';
 export 'delegate/a.dart';
 export 'dialog/a.dart';
 export 'enums/a.dart';
+export 'page/a.dart';
 export 'res/a.dart';
 export 'widget/a.dart';
+export 'typedef.dart';
