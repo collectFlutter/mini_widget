@@ -101,3 +101,29 @@ Future<int> showBottomPopup<T>(BuildContext context, String title, List<T> item,
     ),
   );
 }
+
+void showBottomDialog(BuildContext context, Widget child, {bool barrierDismissible = true}) {
+  showDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (ctx) => WillPopScope(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        if (barrierDismissible) Navigator.pop(context);
+                      },
+                      child: Container(color: MiniColor.black8a),
+                    ),
+                  ),
+                  Material(child: child, color: MiniColor.black8a)
+                ],
+              ),
+            ),
+            onWillPop: () async {
+              return Future.value(barrierDismissible);
+            },
+          ));
+}
