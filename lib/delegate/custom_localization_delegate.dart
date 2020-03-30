@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 /// 国际化（搜索）
 class CustomLocalizationDelegate extends LocalizationsDelegate<MaterialLocalizations> {
   const CustomLocalizationDelegate();
@@ -10,7 +11,8 @@ class CustomLocalizationDelegate extends LocalizationsDelegate<MaterialLocalizat
   bool isSupported(Locale locale) => locale.languageCode == 'en';
 
   @override
-  Future<MaterialLocalizations> load(Locale locale) => SynchronousFuture<MaterialLocalizations>(const CustomLocalization());
+  Future<MaterialLocalizations> load(Locale locale) =>
+      SynchronousFuture<MaterialLocalizations>(const CustomLocalization());
 
   @override
   bool shouldReload(CustomLocalizationDelegate old) => false;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_widget/res/a.dart';
 
 /// 圆角背景控件
+// ignore: must_be_immutable
 class BorderWidget extends StatelessWidget {
   Color backColor;
   final String label;
@@ -29,7 +30,7 @@ class BorderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: (){
+      onLongPress: () {
 //        YeDialog.defaultDialog(context, label);
       },
       child: Container(
@@ -44,10 +45,7 @@ class BorderWidget extends StatelessWidget {
         child: Text(
           label ?? '',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: this.textColor,
-              fontSize: fontSize,
-              fontWeight: fontWeight),
+          style: TextStyle(color: this.textColor, fontSize: fontSize, fontWeight: fontWeight),
         ),
       ),
     );

@@ -69,12 +69,7 @@ class _ScrawlWithLocationState extends MiniState<ScrawlWithLocationPage> {
   }
 
   void _checkPermission() async {
-    if (Platform.isAndroid) {
-      PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.locationAlways);
-      if (permission != PermissionStatus.granted) {
-        await PermissionHandler().requestPermissions([PermissionGroup.locationAlways]);
-      }
-    }
+    await Permission.locationAlways.request();
     AmapLocation.listenLocation(needAddress: true).listen((value) async {
       String address = await value.address;
       location = address ?? "";

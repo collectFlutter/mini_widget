@@ -4,7 +4,6 @@ import 'package:mini_widget/res/a.dart';
 
 import '../typedef.dart';
 
-
 /// 选择组件，支持单选和多选
 class SelectWidget<T> extends StatefulWidget {
   final String checkKey = 'check';
@@ -82,37 +81,56 @@ class _SelectWidgetState extends State<SelectWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool all = items.any((item)=>!item[widget.checkKey]);
+    bool all = items.any((item) => !item[widget.checkKey]);
     List<Widget> checkItem = [];
     for (var i = 0; i < items.length; ++i) {
-      checkItem.add(
-          Container(color: MiniColor.white, child: CheckboxListTile(value: items[i][widget.checkKey],
-            onChanged: (value) {
-              if (widget.multiple) {
-                items[i][widget.checkKey] = value;
-              } else {
-                if (items[i][widget.checkKey] != true) {
-                  items.forEach((f) => f[widget.checkKey] = false);
-                  items[i][widget.checkKey] = true;
-                }
+      checkItem.add(Container(
+        color: MiniColor.white,
+        child: CheckboxListTile(
+          value: items[i][widget.checkKey],
+          onChanged: (value) {
+            if (widget.multiple) {
+              items[i][widget.checkKey] = value;
+            } else {
+              if (items[i][widget.checkKey] != true) {
+                items.forEach((f) => f[widget.checkKey] = false);
+                items[i][widget.checkKey] = true;
               }
-              setState(() {});
-            },
-            title: widget.buildCheckChild != null ? widget.buildCheckChild(context, items[i][widget.itemKey]) : Text(
-              items[i][widget.itemKey][widget.titleKey], style: TextStyle(fontSize: MiniDimen.fontNormal),),),));
+            }
+            setState(() {});
+          },
+          title: widget.buildCheckChild != null
+              ? widget.buildCheckChild(context, items[i][widget.itemKey])
+              : Text(
+                  items[i][widget.itemKey][widget.titleKey],
+                  style: TextStyle(fontSize: MiniDimen.fontNormal),
+                ),
+        ),
+      ));
       checkItem.add(SizedBox(height: 1));
     }
 
-    return Column(children: <Widget>[
-      widget.multiple ? Container(
-          color: MiniColor.white, child: CheckboxListTile(value: !all, title: Text('全选'), onChanged: (value) {
-        for (var i = 0; i < items.length; ++i) {
-          items[i][widget.checkKey] = value;
-        }
-        setState(() {});
-      },)) : SizedBox(height: 1),
-      SizedBox(height: 1),
-      Expanded(child: ListView(children: checkItem),)
-    ],);
+    return Column(
+      children: <Widget>[
+        widget.multiple
+            ? Container(
+                color: MiniColor.white,
+                child: CheckboxListTile(
+                  value: !all,
+                  title: Text('全选'),
+                  onChanged: (value) {
+                    for (var i = 0; i < items.length; ++i) {
+                      items[i][widget.checkKey] = value;
+                    }
+                    setState(() {});
+                  },
+                ))
+            : SizedBox(height: 1),
+        SizedBox(height: 1),
+        Expanded(
+          child: ListView(children: checkItem),
+        )
+      ],
+    );
   }
 }

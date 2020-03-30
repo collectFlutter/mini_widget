@@ -1,9 +1,9 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 //a widget that paint a Badge with full control
 // the badge can be placed inside the child widget or in the corner
+// ignore: must_be_immutable
 class BadgeWidget extends StatefulWidget {
   //the target widget
   final Widget child;
@@ -34,8 +34,10 @@ class BadgeWidget extends StatefulWidget {
 
   //if the badge is inside we have to set [_before]
   bool _inside = false;
+
   //if the badge is before or after the child
   bool _before;
+
   //we can set the space between the badge and the child
   double spacing;
 
@@ -196,8 +198,6 @@ class _BadgeWidgetState extends State<BadgeWidget> {
           color: widget.borderColor,
           width: widget.borderSize,
         ),
-        borderRadius: widget.isRounded == true
-            ? new BorderRadius.circular(100.0)
-            : new BorderRadius.circular(0.0));
+        borderRadius: widget.isRounded == true ? new BorderRadius.circular(100.0) : new BorderRadius.circular(0.0));
   }
 }

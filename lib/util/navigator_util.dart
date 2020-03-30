@@ -1,6 +1,3 @@
-
-
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -27,10 +24,10 @@ class MiniNavigatorUtil {
         context,
         new CupertinoPageRoute<void>(
           builder: (ctx) => WebViewPage(
-                title: title,
-                titleId: titleId,
-                url: url,
-              ),
+            title: title,
+            titleId: titleId,
+            url: url,
+          ),
         ),
       );
     }

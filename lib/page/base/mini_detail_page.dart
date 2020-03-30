@@ -71,7 +71,7 @@ abstract class MiniDetailPage extends StatelessWidget {
 
   bool back(BuildContext context, {bool success}) {
     if (isEmpty(success)) {
-     return Navigator.pop(context);
+      return Navigator.pop(context);
     } else {
       return Navigator.pop(context, success);
     }

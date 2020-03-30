@@ -4,6 +4,7 @@ import '../mini_widget.dart';
 import '../tools.dart';
 
 /// 多选Or单选界面，成功后，返回 List<T> 对象
+// ignore: must_be_immutable
 class SelectPage<T> extends MiniDetailPage {
   final String title;
   final bool showSearchBar;

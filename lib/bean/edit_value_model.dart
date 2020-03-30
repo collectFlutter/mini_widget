@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EditValueModel{
+class EditValueModel {
   /// 背景颜色
   Color color;
 
