@@ -216,13 +216,14 @@ Widget buildTimeLineCell(
                     Container(
                       width: 30,
                       height: 30,
+                        padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue, width: 1.0),
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(15.0)),
                       margin: EdgeInsets.only(top: 2),
-                      alignment: Alignment.topCenter,
-                      child: CircleAvatar(
-                        radius: 25.0,
-                        backgroundImage:
-                            !StringUtil.isEmpty(headUrl) ? NetworkImage(headUrl) : Icon(MdiIcons.accountHardHat),
-                      ),
+                      alignment: Alignment.center,
+                      child:UrlUtil.isUrl(headUrl) ? NetworkImage(headUrl) : Text(title.substring(0,1),style: MiniStyle.textTag.copyWith(color: Colors.white)),
                     ),
                   ],
                 ),

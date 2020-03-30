@@ -25,7 +25,8 @@ dependencies:
   # 等待对话框 https://github.com/jogboms/flutter_spinkit
   flutter_spinkit: ^3.1.0
   qr_flutter: ^2.0.0+55
-
+  flutter_swiper: ^1.1.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

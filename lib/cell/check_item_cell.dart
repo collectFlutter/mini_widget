@@ -2,6 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:mini_tools/mini_tools.dart';
 import 'package:mini_widget/res/a.dart';
 
+/// 单选控件
+Widget buildRadioCell(
+    {String label,
+    ValueChanged<bool> onSelected,
+    Color labelColor = Colors.black87,
+    bool selected = false,
+    Color selectColor = Colors.blue,
+    TextStyle labelTextStyle}) {
+  return FilterChip(
+    label: Text(label ?? ''),
+    labelStyle: labelTextStyle ?? TextStyle(fontSize: 14, color: labelColor),
+    avatar: Icon(selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+        color: selected ? Colors.blue : Colors.black87, size: 14),
+    backgroundColor: Colors.white,
+    padding: EdgeInsets.all(0),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
+    onSelected: (seleced) {
+      if (onSelected != null) onSelected(seleced);
+    },
+  );
+}
+
+/// 复选控件
+Widget buildCheckCell(
+    {String label,
+    Color labelColor = Colors.black87,
+    TextStyle labelTextStyle,
+    bool selected = false,
+    Color selectColor = Colors.blue,
+    ValueChanged<bool> onSelected,
+    EdgeInsets padding}) {
+  return Container(
+    alignment: Alignment.centerLeft,
+    child: InkWell(
+      onTap: () {
+        if (onSelected != null) {
+          onSelected(!selected);
+        }
+      },
+      child: Container(
+        padding: padding ?? EdgeInsets.all(5),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Icon(selected ? Icons.check_box : Icons.check_box_outline_blank,
+                color: selected ? Colors.blue : Colors.black54, size: 18),
+            SizedBox(width: 5),
+            Text(
+              label ?? '',
+              overflow: TextOverflow.ellipsis,
+              style: labelTextStyle ?? TextStyle(fontSize: 16, color: labelColor),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+/// 选择菜单
 Widget buildCheckItem(String label, bool selected, {Color color = MiniColor.white, String iconUrl}) {
   List<Widget> items = [];
   if (iconUrl != null && UrlUtil.isUrl(iconUrl)) {

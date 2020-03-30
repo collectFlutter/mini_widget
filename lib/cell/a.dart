@@ -1,5 +1,5 @@
 export 'card_cell.dart';
-export 'check_cell.dart';
+export 'check_item_cell.dart';
 export 'edit_cell.dart';
 export 'header_cell.dart';
 export 'icon_button.dart';
