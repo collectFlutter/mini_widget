@@ -24,6 +24,7 @@ dependencies:
   amap_location_fluttify: ^0.6.0+acdcd89
   # 等待对话框 https://github.com/jogboms/flutter_spinkit
   flutter_spinkit: ^3.1.0
+  qr_flutter: ^2.0.0+55
 
 dev_dependencies:
   flutter_test:
