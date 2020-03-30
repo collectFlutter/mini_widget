@@ -2,6 +2,7 @@ export 'card_cell.dart';
 export 'check_cell.dart';
 export 'edit_cell.dart';
 export 'header_cell.dart';
+export 'icon_button.dart';
 export 'image_cell.dart';
 export 'ink_cell.dart';
 export 'line_cell.dart';
