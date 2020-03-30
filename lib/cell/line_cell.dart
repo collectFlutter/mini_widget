@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_tools/mini_tools.dart';
 import 'package:mini_widget/res/a.dart';
 import 'package:mini_widget/res/colors.dart';
 import 'package:mini_widget/widget/a.dart';
-
-import '../tools.dart';
 
 Widget buildLineCell(
     {String title,
@@ -216,14 +213,16 @@ Widget buildTimeLineCell(
                     Container(
                       width: 30,
                       height: 30,
-                        padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue, width: 1.0),
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(15.0)),
+                      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 1.0),
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(15.0)),
                       margin: EdgeInsets.only(top: 2),
                       alignment: Alignment.center,
-                      child:UrlUtil.isUrl(headUrl) ? NetworkImage(headUrl) : Text(title.substring(0,1),style: MiniStyle.textTag.copyWith(color: Colors.white)),
+                      child: UrlUtil.isUrl(headUrl)
+                          ? NetworkImage(headUrl)
+                          : Text(title.substring(0, 1), style: MiniStyle.textTag.copyWith(color: Colors.white)),
                     ),
                   ],
                 ),

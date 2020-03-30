@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -9,7 +7,6 @@ import 'package:mini_tools/mini_tools.dart';
 import 'package:mini_widget/mini_widget.dart';
 
 abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAware {
-
   /// 用的 TextEditingController 的时候，记得丢到这里，会自动销毁
   List<TextEditingController> textControllers = [];
 
@@ -21,7 +18,6 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
 
   @protected
   void afterBuild(Duration timestamp) {}
-
 
   @override
   void dispose() {
@@ -60,7 +56,7 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
   /// 显示底部对话框
   @protected
   bottomSheetListMenu<T>(String title, List<T> item,
-      {ValueChanged<int> voidItemCallback, BuildCheckChild<T> buildCheckChild}) =>
+          {ValueChanged<int> voidItemCallback, BuildCheckChild<T> buildCheckChild}) =>
       showBottomPopup(context, title, item, buildCheckChild: buildCheckChild).then((index) {
         if (index < 0) return;
         voidItemCallback(index);
@@ -77,15 +73,15 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
   /// 单个录入对话框
   @protected
   inputDialog(ValueChanged<String> inputCallback,
-      {String label,
-        String message,
-        ValueChanged<String> cancelCallback,
-        String content,
-        String hintText,
-        String title,
-        String cancelText,
-        TextInputType inputType,
-        String okText}) =>
+          {String label,
+          String message,
+          ValueChanged<String> cancelCallback,
+          String content,
+          String hintText,
+          String title,
+          String cancelText,
+          TextInputType inputType,
+          String okText}) =>
       showInputDialog(context, inputCallback,
           cancelCallback: cancelCallback,
           message: message,
@@ -100,13 +96,13 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
   /// 默认对话框
   @protected
   defaultDialog(String content,
-      {String title,
-        String colorContent = '',
-        String cancelText,
-        onCancelPressed,
-        String okText,
-        VoidCallback onOkPressed,
-        bool left = false}) =>
+          {String title,
+          String colorContent = '',
+          String cancelText,
+          onCancelPressed,
+          String okText,
+          VoidCallback onOkPressed,
+          bool left = false}) =>
       showMassageDialog(context, content,
           title: title,
           colorContent: colorContent,
