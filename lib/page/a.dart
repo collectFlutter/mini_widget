@@ -1,4 +1,5 @@
 export 'base/mini_detail_page.dart';
+export 'base/mini_detail_state.dart';
 export 'base/mini_list_state.dart';
 export 'base/mini_segmented_state.dart';
 export 'base/mini_state.dart';

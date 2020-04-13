@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../mini_widget.dart';
+import '../res/a.dart';
 
 /// 空视图
-Widget buildEmptyWidget({Widget child,String emptyImageAsset,String emptyMessage = '暂无内容！'}) {
+Widget buildEmptyWidget({Widget child, String emptyImageAsset, String emptyMessage = '暂无内容！'}) {
+  assert(emptyMessage != null && emptyImageAsset != null);
   return ListView.builder(
     itemCount: 1,
     itemBuilder: (ctx, index) =>
@@ -15,9 +15,9 @@ Widget buildEmptyWidget({Widget child,String emptyImageAsset,String emptyMessage
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/empty_icon.png', width: 100, height: 100),
+              Image.asset(emptyImageAsset, width: 100, height: 100),
               SizedBox(height: 10),
-              Text('暂无内容！', style: MiniStyle.textNormal),
+              Text(emptyMessage, style: MiniStyle.textNormal),
             ],
           ),
         ),

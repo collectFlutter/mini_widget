@@ -1,6 +1,6 @@
 name: mini_widget
 description: Flutter base component package, For example InkCell, BlocProvider, etc.
-version: 0.1.6
+version: 0.1.8
 homepage: https://github.com/flutterme/mini_widget.git
 
 environment:
