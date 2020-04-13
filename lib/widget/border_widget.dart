@@ -12,10 +12,12 @@ class BorderWidget extends StatelessWidget {
   final FontWeight fontWeight;
   final EdgeInsetsGeometry margin;
   final double width;
+  final double height;
 
   BorderWidget(
       {this.backColor,
       this.width,
+        this.height,
       @required this.label,
       this.fontSize = 8,
       this.textColor = Colors.white,
@@ -35,8 +37,9 @@ class BorderWidget extends StatelessWidget {
       },
       child: Container(
         width: width,
+        height: height,
         margin: margin,
-        padding: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
+        padding: EdgeInsets.only(left: 5, right: 5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: backColor ?? MiniColor.green,

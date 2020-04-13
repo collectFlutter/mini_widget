@@ -10,6 +10,7 @@ import 'text_cell.dart';
 /// 抬头
 Widget buildHeaderCell(
     {String imagePath,
+    Widget ledging,
     String title = '',
     String title2 = '',
     TextStyle textStyle,
@@ -27,15 +28,17 @@ Widget buildHeaderCell(
       children: <Widget>[
         Container(
           padding: EdgeInsets.only(left: 5, right: 5),
+          width: 30,
           alignment: Alignment.centerLeft,
-          child: imagePath != null
-              ? UrlUtil.isUrl(imagePath)
-                  ? Image.network(imagePath, height: 20, width: 20)
-                  : Image.asset(imagePath, height: 20, width: 20)
-              : Container(),
+          child: ledging ??
+              (imagePath != null
+                  ? UrlUtil.isUrl(imagePath)
+                      ? Image.network(imagePath, height: 20, width: 20)
+                      : Image.asset(imagePath, height: 20, width: 20)
+                  : Container()),
         ),
         Container(
-            padding: EdgeInsets.only(left: imagePath == null ? 0 : 30),
+            padding: EdgeInsets.only(left: (imagePath == null && ledging == null) ? 0 : 30),
             alignment: Alignment.centerLeft,
             child: Text(title ?? '', style: textStyle, overflow: TextOverflow.ellipsis)),
         Container(
@@ -68,23 +71,24 @@ Widget buildListMoreCell(
     VoidCallback onLongPress,
     String moreText = '更多   '}) {
   return Padding(
-      padding: EdgeInsets.only(left: 18, top: 8, bottom: 5, right: 10),
-      child: Row(children: <Widget>[
-        Expanded(
-          child: Text.rich(
-            TextSpan(children: [
-              TextSpan(text: '$title (', style: MiniStyle.textTitle),
-              TextSpan(text: '$allSize', style: MiniStyle.textTitle.copyWith(color: MiniColor.deepPink)),
-              TextSpan(text: ')', style: MiniStyle.textTitle),
-            ]),
-          ),
+    padding: EdgeInsets.only(left: 18, top: 8, bottom: 5, right: 10),
+    child: Row(children: <Widget>[
+      Expanded(
+        child: Text.rich(
+          TextSpan(children: [
+            TextSpan(text: '$title (', style: MiniStyle.textTitle),
+            TextSpan(text: '$allSize', style: MiniStyle.textTitle.copyWith(color: MiniColor.deepPink)),
+            TextSpan(text: ')', style: MiniStyle.textTitle),
+          ]),
         ),
-        GestureDetector(
-          child: Text((allSize > size && size > -1) ? moreText : '', style: MiniStyle.textUrl),
-          onTap: onMoreTop,
-          onLongPress: onLongPress,
-        ),
-      ]));
+      ),
+      GestureDetector(
+        child: Text((allSize > size && size > -1) ? moreText : '', style: MiniStyle.textUrl),
+        onTap: onMoreTop,
+        onLongPress: onLongPress,
+      ),
+    ]),
+  );
 }
 
 /// 构建头部+卡片
@@ -127,20 +131,17 @@ Widget buildHeadCardCell(
               children: values.map((data) {
                 if (data is TagValueModel) {
                   return buildTextCell(
-                    data: data,
-                    fontSize: fontSize,
-                    padding: valuePadding,
-                    paddingRight: paddingRight,
-                    tagWidth: tagWidth,
-                    miniHeight: miniHeight,
-                    context: context,
-                  );
+                      data: data,
+                      fontSize: fontSize,
+                      padding: valuePadding,
+                      paddingRight: paddingRight,
+                      tagWidth: tagWidth,
+                      miniHeight: miniHeight,
+                      context: context);
                 }
                 if (data is EditValueModel) {
                   data.tagWidth = tagWidth;
-                  return Container(
-                    child: buildEditCell(data: data, minHeight: miniHeight, padding: valuePadding),
-                  );
+                  return Container(child: buildEditCell(data: data, minHeight: miniHeight, padding: valuePadding));
                 }
                 if (data is Widget) {
                   return data;

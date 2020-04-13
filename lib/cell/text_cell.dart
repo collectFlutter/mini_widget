@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_tools/mini_tools.dart';
 import 'package:mini_widget/bean/tag_value_model.dart';
 import 'package:mini_widget/res/a.dart';
+
+import '../tools.dart';
 
 /// Tag + Value（Child)
 Widget buildTextCell(
@@ -18,8 +21,11 @@ Widget buildTextCell(
     Padding(
       padding: padding,
       child: data.tag2 == null
-          ? _buildOneLine(data.tag, data.value,
-              color: data.valueColor,
+          ? _buildOneLine(
+              data.tag,
+              data.value,
+              tagColor: data.tagColor,
+              valueColor: data.valueColor,
               clip: data.clip,
               inputType: data.inputType,
               child: data.child,
@@ -28,34 +34,43 @@ Widget buildTextCell(
               miniHeight: miniHeight,
               fontSize: fontSize,
               context: context,
-              paddingRight: paddingRight)
+              paddingRight: paddingRight,
+            )
           : Flex(
               direction: Axis.horizontal,
               children: <Widget>[
                 Expanded(
                     flex: 1,
-                    child: _buildOneLine(data.tag, data.value,
-                        color: data.valueColor,
-                        clip: data.clip,
-                        inputType: data.inputType,
-                        valueMaxLines: data.maxLines,
-                        tagWidth: tagWidth,
-                        miniHeight: miniHeight,
-                        fontSize: fontSize,
-                        context: context,
-                        paddingRight: paddingRight)),
+                    child: _buildOneLine(
+                      data.tag,
+                      data.value,
+                      tagColor: data.tagColor,
+                      valueColor: data.valueColor,
+                      clip: data.clip,
+                      inputType: data.inputType,
+                      valueMaxLines: data.maxLines,
+                      tagWidth: tagWidth,
+                      miniHeight: miniHeight,
+                      fontSize: fontSize,
+                      context: context,
+                      paddingRight: paddingRight,
+                    )),
                 Expanded(
                     flex: 1,
-                    child: _buildOneLine(data.tag2, data.value2,
-                        color: data.valueColor2,
-                        inputType: data.inputType2,
-                        valueMaxLines: data.maxLines2,
-                        tagWidth: tagWidth,
-                        miniHeight: miniHeight,
-                        clip: data.clip,
-                        fontSize: fontSize,
-                        context: context,
-                        paddingRight: paddingRight)),
+                    child: _buildOneLine(
+                      data.tag2,
+                      data.value2,
+                      tagColor: data.tagColor2,
+                      valueColor: data.valueColor2,
+                      inputType: data.inputType2,
+                      valueMaxLines: data.maxLines2,
+                      tagWidth: tagWidth,
+                      miniHeight: miniHeight,
+                      clip: data.clip,
+                      fontSize: fontSize,
+                      context: context,
+                      paddingRight: paddingRight,
+                    )),
               ],
             ),
     ),
@@ -63,28 +78,37 @@ Widget buildTextCell(
   ]);
 }
 
-_buildOneLine(String tag, String value,
-    {Color color,
-    TextInputType inputType = TextInputType.text,
-    bool clip = false,
-    Widget child,
-    double tagWidth = 70,
-    double miniHeight = 20,
-    double fontSize,
-    int valueMaxLines = 1,
-    BuildContext context,
-    double paddingRight = 0.0}) {
+_buildOneLine(
+  String tag,
+  String value, {
+  Color tagColor = MiniColor.gray,
+  Color valueColor = Colors.black,
+  TextInputType inputType = TextInputType.text,
+  bool clip = false,
+  Widget child,
+  double tagWidth = 70,
+  double miniHeight = 20,
+  double fontSize,
+  int valueMaxLines = 1,
+  BuildContext context,
+  double paddingRight = 0.0,
+}) {
   bool flag = false;
   String url = '';
+  IconData iconData;
+  if(clip) iconData = Icons.content_copy;
   if (inputType == TextInputType.phone) {
     flag = true;
     url = 'tel:$value';
+    iconData = Icons.phone;
   } else if (inputType == TextInputType.emailAddress) {
     flag = true;
     url = 'mailto:$value';
+    iconData = Icons.email;
   } else if (inputType == TextInputType.url) {
     flag = true;
     url = value;
+    iconData = MdiIcons.earth;
   }
 
   return Row(
@@ -99,7 +123,7 @@ _buildOneLine(String tag, String value,
           tag ?? '',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: TextStyle(color: MiniColor.gray, height: 1.1, fontSize: fontSize),
+          style: TextStyle(color: tagColor, height: 1.1, fontSize: fontSize),
         ),
       ),
       Expanded(
@@ -117,10 +141,10 @@ _buildOneLine(String tag, String value,
                         style: TextStyle(
                             height: 1.1,
                             fontSize: fontSize,
-                            color: color ?? (flag ? MiniColor.primary : MiniColor.black)),
+                            color: valueColor ?? (flag ? MiniColor.primary : MiniColor.black)),
                       ),
                     ),
-                    clip ? Icon(Icons.content_copy, size: 12) : Container()
+                    iconData!=null? Icon(iconData, size: 12,color: Colors.blue) : Container()
                   ],
                 ),
                 onTap: () {
@@ -129,14 +153,14 @@ _buildOneLine(String tag, String value,
                   } else if (clip) {
                     if (!StringUtil.isEmpty(value) && context != null) {
                       StringUtil.clip(value);
-//                      YU.toast('已复制');
+                      showMessage('已复制', context);
                     }
                   }
                 },
                 onLongPress: () {
                   if (!StringUtil.isEmpty(value) && context != null && clip) {
                     StringUtil.clip(value);
-//                    YU.toast('已复制');
+                    showMessage('已复制', context);
                   }
                 },
               ),

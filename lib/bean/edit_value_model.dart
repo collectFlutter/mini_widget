@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_widget/res/a.dart';
 
 class EditValueModel {
   /// 背景颜色
@@ -6,6 +7,10 @@ class EditValueModel {
 
   /// 标题
   String tag;
+
+  Color tagColor;
+
+  Color tagColor2;
 
   /// 后缀
   String suffix;
@@ -60,35 +65,38 @@ class EditValueModel {
 
   /// 自定义内容
   Widget child;
+
   EditValueModel({
     this.tag,
-    this.suffix,
-    this.tagWidth = 80,
-    this.hintText,
-    this.color = Colors.white,
-    this.valueColor,
-    this.inputType = TextInputType.text,
-    this.maxLines = 1,
-    this.onChange,
-    this.inputDecoration,
-    this.controller,
     this.tag2,
+    this.suffix,
     this.suffix2,
+    this.tagWidth = 80,
     this.tagWidth2 = 80,
+    this.hintText,
     this.hintText2,
-    this.valueColor2,
+    this.valueColor = MiniColor.black,
+    this.valueColor2 = MiniColor.black,
+    this.inputType = TextInputType.text,
     this.inputType2 = TextInputType.text,
-    this.onChange2,
-    this.inputDecoration2,
-    this.controller2,
+    this.maxLines = 1,
     this.maxLines2 = 1,
-    this.showLine = true,
+    this.onChange,
+    this.onChange2,
+    this.inputDecoration,
+    this.inputDecoration2,
+    this.controller,
+    this.controller2,
     this.isEdit = true,
     this.isEdit2 = true,
     this.required = false,
     this.required2 = false,
     this.focusNode,
     this.focusNode2,
+    this.tagColor = MiniColor.gray,
+    this.tagColor2 = MiniColor.gray,
+    this.color = Colors.white,
+    this.showLine = true,
     this.child,
   });
 }

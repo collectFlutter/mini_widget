@@ -57,10 +57,7 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
   @protected
   bottomSheetListMenu<T>(String title, List<T> item,
           {ValueChanged<int> voidItemCallback, BuildCheckChild<T> buildCheckChild}) =>
-      showBottomPopup(context, title, item, buildCheckChild: buildCheckChild).then((index) {
-        if (index < 0) return;
-        voidItemCallback(index);
-      });
+      showBottomPopup(context, title, item, buildCheckChild: buildCheckChild).then(voidItemCallback);
 
   /// 等待对话框
   @protected

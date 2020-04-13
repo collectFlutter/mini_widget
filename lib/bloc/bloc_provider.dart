@@ -8,12 +8,14 @@ abstract class BlocBase {
 class BlocProvider<T extends BlocBase> extends StatefulWidget {
   final T bloc;
   final Widget child;
-  // @required
+
   BlocProvider({
     Key key,
-    this.child,
-    this.bloc,
-  }) : super(key: key);
+    @required this.bloc,
+    @required this.child,
+  })  : assert(bloc != null),
+        assert(child != null),
+        super(key: key);
 
 
   @override
@@ -21,6 +23,7 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
 
   static T of<T extends BlocBase>(BuildContext context) {
     final type = _typeOf<BlocProvider<T>>();
+    // ignore: deprecated_member_use
     BlocProvider<T> provider = context.ancestorWidgetOfExactType(type);
     return provider.bloc;
   }

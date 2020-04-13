@@ -9,14 +9,10 @@ class ScrawlPainter extends CustomPainter {
   ScrawlPainter({@required this.paints});
 
   void paint(Canvas canvas, Size size) {
-    if (paints == null || paints.length == 0) {
-      return;
-    }
+    if (paints == null || paints.length == 0) return;
     paints.forEach((paint) {
       List<Offset> point = paint.sPoint;
-      if (point == null || point.length == 0) {
-        return;
-      }
+      if (point == null || point.length == 0) return;
       if (point.length == 1)
         canvas.drawPoints(PointMode.points, point, paint.linePaint);
       else {

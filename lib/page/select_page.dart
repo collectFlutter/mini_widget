@@ -50,7 +50,7 @@ class SelectPage<T> extends MiniDetailPage {
       onPressed: () {
         List<T> temp = _child.getSelected();
         if (temp.length == 0) {
-          toast('未选择任何内容！');
+          showMessage('未选择任何内容！',context);
           return;
         } else {
           back(context, success: true, items: temp);

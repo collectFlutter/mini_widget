@@ -369,7 +369,7 @@ class _ScrawlWithLocationState extends MiniState<ScrawlWithLocationPage> {
                 FileUtil.capturePng2List(boundary).then((Uint8List item) {
                   pop();
                   if (item == null || item.length == 0) {
-                    toast('绘制失败，请退出重试！');
+                    showMessage('绘制失败，请退出重试！',context);
                     return;
                   }
                   back(imgList: item, success: true);

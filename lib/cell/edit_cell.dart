@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_tools/mini_tools.dart';
+import 'package:mini_widget/res/a.dart';
 
 import '../bean/a.dart';
 
@@ -23,20 +24,20 @@ buildEditCell({
                   hintText: data.hintText,
                   valueColor: data.valueColor,
                   tagWidth: data.tagWidth,
-                  minHeight: minHeight,
                   isEdit: data.isEdit,
                   required: data.required,
                   tag: data.tag,
+                  tagColor: data.tagColor,
                   suffix: data.suffix,
                   controller: data.controller,
                   inputType: data.inputType,
                   child: data.child,
                   valueMaxLines: data.maxLines,
+                  minHeight: minHeight,
                 )
               : _buildTwoItem(
                   suffix: data.suffix,
                   suffix2: data.suffix2,
-                  minHeight: minHeight,
                   valueMaxLines: data.maxLines,
                   valueColor: data.valueColor,
                   valueColor2: data.valueColor2,
@@ -48,12 +49,16 @@ buildEditCell({
                   required2: data.required2,
                   tag: data.tag,
                   tag2: data.tag2,
+                  tagColor: data.tagColor,
+                  tagColor2: data.tagColor2,
                   controller: data.controller,
                   controller2: data.controller2,
                   inputType: data.inputType,
                   inputType2: data.inputType2,
                   hintText: data.hintText,
-                  hintText2: data.hintText2),
+                  hintText2: data.hintText2,
+                  minHeight: minHeight,
+                ),
         ),
         data.showLine ? Divider(height: 1, color: Colors.grey[80]) : Container(height: 0),
       ],
@@ -69,10 +74,10 @@ _buildTwoItem(
     double minHeight = 35,
     String suffix,
     String suffix2,
-    Color tagColor = Colors.grey,
-    Color tagColor2 = Colors.grey,
-    Color valueColor,
-    Color valueColor2,
+    Color tagColor = MiniColor.gray,
+    Color tagColor2 = MiniColor.gray,
+    Color valueColor = MiniColor.black,
+    Color valueColor2 = MiniColor.black,
     FocusNode focusNode,
     FocusNode focusNode2,
     bool required = false,
@@ -84,8 +89,8 @@ _buildTwoItem(
     TextEditingController controller2,
     ValueChanged<String> onChange,
     ValueChanged<String> onChange2,
-    TextInputType inputType,
-    TextInputType inputType2,
+    TextInputType inputType = TextInputType.text,
+    TextInputType inputType2 = TextInputType.text,
     InputDecoration inputDecoration,
     InputDecoration inputDecoration2,
     String hintText,
@@ -119,8 +124,8 @@ _buildTwoItem(
         controller: controller,
         maxLengthEnforced: true,
         onChanged: onChange,
-        keyboardType: inputType ?? TextInputType.text,
-        inputFormatters: _getInputFormatter(inputType ?? TextInputType.text),
+        keyboardType: inputType,
+        inputFormatters: _getInputFormatter(inputType),
         decoration: inputDecoration ??
             InputDecoration(
                 hintText: hintText ?? '请填写$tag',
@@ -129,7 +134,7 @@ _buildTwoItem(
                 contentPadding: EdgeInsets.only(left: 3),
                 suffixStyle: TextStyle(color: Colors.black87),
                 suffixText: suffix ?? ''),
-        style: TextStyle(height: 1.1, fontSize: 14, color: valueColor ?? Colors.black),
+        style: TextStyle(height: 1.1, fontSize: 14, color: valueColor),
       ),
     ),
     Container(
@@ -172,7 +177,7 @@ _buildTwoItem(
               suffixText: suffix2 ?? '',
               suffixStyle: TextStyle(color: Colors.black87),
             ),
-        style: TextStyle(height: 1.1, fontSize: 14, color: valueColor2 ?? Colors.black),
+        style: TextStyle(height: 1.1, fontSize: 14, color: valueColor2),
       ),
     ),
   ]);
@@ -183,8 +188,8 @@ _buildOneItem(
     String suffix,
     double tagWidth = 80,
     double minHeight = 35,
-    Color valueColor,
-    Color tagColor = Colors.grey,
+    Color valueColor = MiniColor.black,
+    Color tagColor = MiniColor.gray,
     bool required = false,
     int valueMaxLines = 1,
     bool isEdit = true,
@@ -192,7 +197,7 @@ _buildOneItem(
     KeyboardActionsConfig config,
     TextEditingController controller,
     ValueChanged<String> onChange,
-    TextInputType inputType,
+    TextInputType inputType = TextInputType.text,
     InputDecoration inputDecoration,
     String hintText,
     Widget child}) {
@@ -226,8 +231,8 @@ _buildOneItem(
               maxLengthEnforced: true,
               controller: controller,
               onChanged: onChange,
-              keyboardType: inputType ?? TextInputType.text,
-              inputFormatters: _getInputFormatter(inputType ?? TextInputType.text),
+              keyboardType: inputType,
+              inputFormatters: _getInputFormatter(inputType),
               decoration: inputDecoration ??
                   InputDecoration(
                       hintText: hintText ?? '请填写$tag',
@@ -235,7 +240,7 @@ _buildOneItem(
                       border: isEdit ? null : InputBorder.none,
                       contentPadding: EdgeInsets.only(left: 3),
                       suffixText: suffix ?? ''),
-              style: TextStyle(height: 1.1, fontSize: 14, color: valueColor ?? Colors.black),
+              style: TextStyle(height: 1.1, fontSize: 14, color: valueColor),
             ),
       ),
     ],
