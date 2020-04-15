@@ -23,7 +23,7 @@ Widget buildTagSelectCell<T>(
   int valueMaxLines = 1,
   double paddingRight = 0.0,
   EdgeInsetsGeometry padding = const EdgeInsets.all(1),
-  bool showLine = true,
+  bool showLine = false,
   Color color = Colors.white,
   Widget child,
   ValueChanged<int> onItemSelected,

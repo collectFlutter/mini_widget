@@ -15,18 +15,19 @@ Widget buildSearchCell({
     alignment: Alignment.center,
     decoration: BoxDecoration(color: Color(0xFFF7F6F6), borderRadius: BorderRadius.circular(26.0)),
     child: TextField(
+
       controller: controller,
       enabled: enInput,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.search, size: 16),
         hintText: hint,
-        helperStyle: TextStyle(textBaseline: TextBaseline.alphabetic),
+        helperStyle: TextStyle(textBaseline: TextBaseline.ideographic,height: 1.1),
         hasFloatingPlaceholder: false,
         border: InputBorder.none,
       ),
       onSubmitted: onSubmitted,
       onChanged: onChanged,
-      style: TextStyle(fontSize: 14, textBaseline: TextBaseline.alphabetic),
+      style: TextStyle(fontSize: 14, textBaseline: TextBaseline.ideographic,height: 1.1),
     ),
   );
 }

@@ -96,7 +96,7 @@ class EditValueModel {
     this.tagColor = MiniColor.gray,
     this.tagColor2 = MiniColor.gray,
     this.color = Colors.white,
-    this.showLine = true,
+    this.showLine = false,
     this.child,
   });
 }
