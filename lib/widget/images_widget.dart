@@ -8,6 +8,7 @@ import 'package:mini_widget/dialog/bottom_dialog.dart';
 import 'package:mini_widget/page/images_view_page.dart';
 import 'package:mini_widget/res/a.dart';
 import 'package:mini_widget/util/navigator_util.dart';
+
 /// 标题 图片表格,支持编辑
 class ImagesWidget extends StatelessWidget {
   final String label;
@@ -84,7 +85,8 @@ class ImagesWidget extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                MiniNavigatorUtil.pushPage(context, ImagesViewPage(imgUrls: imgUrls, defaultIndex: i,width: MediaQuery.of(context).size.width));
+                MiniNavigatorUtil.pushPage(context,
+                    ImagesViewPage(imgUrls: imgUrls, defaultIndex: i, width: MediaQuery.of(context).size.width));
               },
               child: Stack(
                 children: <Widget>[
@@ -156,7 +158,7 @@ class ImagesWidget extends StatelessWidget {
                 padding: EdgeInsets.all(5),
                 width: 80,
                 height: 80,
-                child: Icon(MdiIcons.imageSearchOutline,size: 70,color: Colors.grey[200]),
+                child: Icon(MdiIcons.imageSearchOutline, size: 70, color: Colors.grey[200]),
               ),
             ),
           ),
