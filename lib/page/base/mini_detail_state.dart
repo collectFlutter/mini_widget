@@ -19,7 +19,12 @@ abstract class MiniDetailState<T extends StatefulWidget> extends MiniState<T> {
             Container(
               color: getBackgroundColor(),
               alignment: Alignment.center,
-              child: buildBody() ?? Text('正在加载数据…'),
+              child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                    child: buildBody(),
+                  ) ??
+                  Text('正在加载数据…'),
             ),
             Positioned(
                 bottom: 0, left: 0, right: 0, child: Offstage(child: buildBottomOffstage(), offstage: bottomOffstage))

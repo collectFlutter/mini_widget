@@ -16,6 +16,7 @@ abstract class MiniState<T extends StatefulWidget> extends State<T> with RouteAw
     SchedulerBinding.instance.addPostFrameCallback(afterBuild);
   }
 
+  /// 页面首次构建结束回调
   @protected
   void afterBuild(Duration timestamp) {}
 
