@@ -1,10 +1,6 @@
-import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
-void init({String amap}) {
-  AmapCore.init(amap);
-}
 
 /// 简单提示
 void showMessage(String msg, BuildContext context) => showToast(msg, context: context);
