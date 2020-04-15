@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mini_widget/mini_widget.dart';
+import 'page/form_demo_page.dart';
 import 'page/segmented_demo_page.dart';
 
 var pages = [
@@ -28,5 +29,6 @@ var pages = [
       },
     ),
   },
-  {'label': '水平分段', 'page': SegmentedDemoPage(),},
+  {'label': '水平分段', 'page': SegmentedDemoPage()},
+  {'label': '表单页面', 'page': FormDemoPage()},
 ];

@@ -30,6 +30,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends MiniState<MyHomePage> {
   List<Widget> items = [];
   @override
+  void afterBuild(Duration timestamp) {
+    MiniWidget.init('MiniWidget', Icon(Icons.android, color: Colors.green), userName: 'yshye');
+  }
+
+  @override
   Widget build(BuildContext context) {
     items.clear();
     return Scaffold(

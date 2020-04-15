@@ -10,10 +10,16 @@ Flutter 常用组件封装
 dependencies:
   flutter:
     sdk: flutter
-  mini_widget: ^0.1.0
+  mini_widget: ^0.1.9
 ```
 
 ## 使用：
+
 ```dart
-import 'package:mini_widget/mini_widget.dart';
+import 'package:mini_widget/mini_widget.dart' ;
+```
+
+## init
+```dart
+MiniWidget.init('应用名称', 应用Logo , amap : '高德AppKey',userName : '用户名');
 ```
