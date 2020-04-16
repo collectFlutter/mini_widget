@@ -1,5 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+
 /*
 * 中心处旋转动画，AnimatedContainer针对的是左上角的旋转，注意角度传递的是π
 * */
@@ -14,18 +14,15 @@ class RotateContainer extends StatefulWidget {
   RotateContainer({this.endAngle, this.child, this.rotated = false});
 }
 
-class _RotateContainerState extends State<RotateContainer>
-    with SingleTickerProviderStateMixin {
+class _RotateContainerState extends State<RotateContainer> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   double angle = 0;
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    _animation =
-    Tween(begin: 0.0, end: widget.endAngle).animate(_controller)
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+    _animation = Tween(begin: 0.0, end: widget.endAngle).animate(_controller)
       ..addListener(() {
         setState(() {
           angle = _animation.value;
