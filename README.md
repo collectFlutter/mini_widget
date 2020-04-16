@@ -10,7 +10,7 @@ Flutter 常用组件封装
 dependencies:
   flutter:
     sdk: flutter
-  mini_widget: ^0.1.9
+  mini_widget: ^0.2.0
 ```
 
 ## 使用：
