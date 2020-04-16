@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
-
 /// 简单提示
 void showMessage(String msg, BuildContext context) => showToast(msg, context: context);
 

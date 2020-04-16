@@ -63,10 +63,10 @@ class MiniNavigatorUtil {
     File compressFile = await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
     Navigator.pop(context);
     if (!hasScrawl) return compressFile.path;
+
     /// 进行图片涂鸦
     return await getScrawlImage(context, imagePath: compressFile.path);
   }
-
 
   /// 拍照+涂鸦(位置信息)
   static Future<String> cameraImageAndScrawl(BuildContext context,

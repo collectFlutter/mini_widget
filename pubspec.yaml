@@ -1,6 +1,6 @@
 name: mini_widget
 description: Flutter base component package, For example InkCell, BlocProvider, etc.
-version: 0.1.9
+version: 0.2.0
 homepage: https://github.com/flutterme/mini_widget.git
 
 environment:
@@ -18,17 +18,17 @@ dependencies:
   flutter_svg: ^0.17.3+1
   oktoast: ^2.2.0
   flutter_widget_from_html: ^0.3.1-rc
-  # 权限申请
   permission_handler: ^5.0.0+hotfix.1
   amap_location_fluttify: ^0.10.0+e74b91b
   flutter_spinkit: ^4.1.2+1
   qr_flutter: ^3.2.0
   webview_flutter: ^0.3.18+1
   flutter_swiper: ^1.1.6
-  rxdart: ^0.23.1
+  rxdart: ^0.24.0
   flutter_easyrefresh: ^2.1.0
   shimmer: ^1.1.1
   image_picker: ^0.6.5
+  vector_math: ^2.0.8
 
 dev_dependencies:
   flutter_test:
