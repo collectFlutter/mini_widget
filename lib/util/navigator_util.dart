@@ -16,16 +16,33 @@ import '../page/scrawl_Location_page.dart';
 import 'widget_util.dart';
 
 class MiniNavigatorUtil {
-  static Future<dynamic> pushPage(BuildContext context, Widget page, {String pageName}) {
-    if (context == null || page == null) return null;
-    return Navigator.push(context, new CupertinoPageRoute(builder: (ctx) => page));
+  static Future<dynamic> pushPage(BuildContext context, Widget page, {String pageName}) async {
+    assert(context != null && page != null);
+    FocusScope.of(context).requestFocus(FocusNode());
+    var result = await Navigator.push(context, CupertinoPageRoute(builder: (ctx) => page));
+    return result;
+    // return false;
+    // if (context == null || page == null) return null;
+    // return Navigator.push(context, new CupertinoPageRoute(builder: (ctx) => page));
+  }
+
+  static void pop(BuildContext context, {bool success}) {
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (Navigator.canPop(context)) {
+      if (success == null) {
+        Navigator.pop(context);
+      } else {
+        Navigator.pop(context, success);
+      }
+    }
   }
 
   static Future<dynamic> pushReplacement(BuildContext context, Widget page) {
     return Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx) => page));
   }
 
-  static void pushWeb(BuildContext context, {String title, String titleId, String url, bool isHome: false}) {
+  static void pushWeb(BuildContext context,
+      {String title, String titleId, String url, bool isHome: false}) {
     if (context == null || StringUtil.isEmpty(url)) return;
     if (url.endsWith(".apk")) {
       launchInBrowser(url, title: title ?? titleId);
@@ -33,11 +50,12 @@ class MiniNavigatorUtil {
       Navigator.push(
         context,
         new CupertinoPageRoute<void>(
-          builder: (ctx) => WebViewPage(
-            title: title,
-            titleId: titleId,
-            url: url,
-          ),
+          builder: (ctx) =>
+              WebViewPage(
+                title: title,
+                titleId: titleId,
+                url: url,
+              ),
         ),
       );
     }
@@ -90,10 +108,10 @@ class MiniNavigatorUtil {
 
   static Future<String> getScrawlImage(BuildContext context,
       {String imagePath,
-      List<Color> colors = const [Colors.redAccent, Colors.lightBlueAccent],
-      bool enableTransform = true,
-      backColor = Colors.black12}) async {
-    File scrawlImage = await pushPage(
+        List<Color> colors = const [Colors.redAccent, Colors.lightBlueAccent],
+        bool enableTransform = true,
+        backColor = Colors.black12}) async {
+    var scrawlImage = await pushPage(
         context,
         ScrawlWithLocationPage(imagePath,
             colors: colors,
@@ -102,6 +120,7 @@ class MiniNavigatorUtil {
             appName: miniGlobal?.appName,
             authorName: miniGlobal?.userName,
             appLogo: miniGlobal?.appLogo));
-    return scrawlImage.path;
+    print("文件路径：${scrawlImage}");
+    return scrawlImage;
   }
 }

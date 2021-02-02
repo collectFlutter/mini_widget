@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mini_widget/res/a.dart';
 
 /// 表头
-Widget  buildTabHeader(List<String> titles,
+Widget buildTabHeader(List<String> titles,
     {List<int> flex,
     List<Color> colors,
+    List<Alignment> alignments,
+    List<TextStyle> textStyles,
     Color color,
     TextStyle textStyle,
     double height = 40,
@@ -12,26 +14,33 @@ Widget  buildTabHeader(List<String> titles,
     Widget actionChild,
     double actionWidth = 80}) {
   assert(flex == null || titles.length == flex.length);
+  assert(alignments == null || titles.length == alignments.length);
+  assert(textStyles == null || titles.length == textStyles.length);
   List<Widget> items = [];
 
   for (var i = 0; i < titles.length; ++i) {
     var title = titles[i];
-    items.add(Expanded(
-        flex: flex == null ? 1 : flex[i] ?? 1,
-        child: Center(
-            child: Text(title,
-                style: textStyle ??
-                    MiniStyle.textTag.copyWith(
-                        color: colors == null
-                            ? Colors.white
-                            : colors[i] ?? Colors.white)))));
+    Alignment _alignment = alignments != null ? alignments[i] : Alignment.center;
+    TextStyle _style = textStyles != null
+        ? textStyles[i]
+        : (textStyle ??
+            MiniStyle.textTag.copyWith(
+              color: colors == null ? Colors.white : colors[i] ?? Colors.white,
+            ));
+    int _flex = flex != null ? flex[i] : 1;
+    items.add(
+      Expanded(
+        flex: _flex,
+        child: Container(alignment: _alignment, child: Text(title, style: _style)),
+      ),
+    );
   }
   if (action) {
     items.add(Container(
       width: actionWidth,
       alignment: Alignment.center,
-      child:actionChild??Text('操作',
-          style: textStyle ?? MiniStyle.textTag.copyWith(color: Colors.white)),
+      child: actionChild ??
+          Text('操作', style: textStyle ?? MiniStyle.textTag.copyWith(color: Colors.white)),
     ));
   }
 
@@ -39,44 +48,51 @@ Widget  buildTabHeader(List<String> titles,
     color: color ?? MiniColor.primary,
     height: height,
     alignment: Alignment.center,
-    child: Flex(
-      direction: Axis.horizontal,
-      children: items,
-    ),
+    child: Flex(direction: Axis.horizontal, children: items),
   );
 }
 
 /// 表行
-Widget buildTabRow(List<String> values,
-    {List<int> flex,
-    List<Color> colors,
-    Color color,
-    TextStyle textStyle,
-    GestureTapCallback onTap,
-    double height = 45,
-    bool action = false,
-    double actionWidth = 80,
-    Widget actionChild,}) {
+Widget buildTabRow(
+  List<String> values, {
+  List<int> flex,
+  List<Color> colors,
+  List<Alignment> alignments,
+  List<TextStyle> textStyles,
+  Color color,
+  TextStyle textStyle,
+  GestureTapCallback onTap,
+  double height = 45,
+  bool action = false,
+  double actionWidth = 80,
+  Widget actionChild,
+}) {
   assert(flex == null || values.length == flex.length);
+  assert(alignments == null || values.length == alignments.length);
+  assert(textStyles == null || values.length == textStyles.length);
   List<Widget> items = [];
   for (var i = 0; i < values.length; ++i) {
     var value = values[i];
-    items.add(Expanded(
-        flex: flex == null ? 1 : flex[i] ?? 1,
-        child: Center(
-            child: Text(value ?? '',
-                style: textStyle ??
-                    MiniStyle.textDarkNormal.copyWith(
-                        fontSize: MiniDimen.fontSmall,
-                        color: colors == null
-                            ? MiniColor.textDark
-                            : colors[i] ?? MiniColor.textDark)))));
+    Alignment _alignment = alignments != null ? alignments[i] : Alignment.center;
+    TextStyle _style = textStyles != null
+        ? textStyles[i]
+        : (textStyle ??
+            MiniStyle.textDarkNormal.copyWith(
+                fontSize: MiniDimen.fontSmall,
+                color: colors == null ? MiniColor.textDark : colors[i] ?? MiniColor.textDark));
+    int _flex = flex != null ? flex[i] : 1;
+    items.add(
+      Expanded(
+        flex: _flex,
+        child: Container(alignment: _alignment, child: Text(value ?? '', style: _style)),
+      ),
+    );
   }
- if (action) {
+  if (action) {
     items.add(Container(
       width: actionWidth,
       alignment: Alignment.center,
-      child: Center(child: actionChild??Container()),
+      child: Center(child: actionChild ?? Container()),
     ));
   }
   return Material(
@@ -114,9 +130,8 @@ Widget buildLongTabHeader(List<String> titles,
     items.add(Container(
         width: width,
         alignment: Alignment.center,
-        child: Text(title,
-            style:
-                textStyle ?? MiniStyle.textTag.copyWith(color: MiniColor.white))));
+        child:
+            Text(title, style: textStyle ?? MiniStyle.textTag.copyWith(color: MiniColor.white))));
   }
   return SingleChildScrollView(
     controller: controller,
@@ -148,8 +163,7 @@ Widget buildLongTabRow(List<String> values,
         width: width,
         alignment: Alignment.center,
         child: Text(value ?? '',
-            style: textStyle ??
-                MiniStyle.textDarkNormal.copyWith(fontSize: MiniDimen.fontSmall))));
+            style: textStyle ?? MiniStyle.textDarkNormal.copyWith(fontSize: MiniDimen.fontSmall))));
   }
   return Material(
     child: Ink(
@@ -160,8 +174,7 @@ Widget buildLongTabRow(List<String> values,
           physics: NeverScrollableScrollPhysics(),
           controller: controller,
           scrollDirection: Axis.horizontal,
-          child: Container(
-              alignment: Alignment.centerLeft, child: Row(children: items)),
+          child: Container(alignment: Alignment.centerLeft, child: Row(children: items)),
         ),
       ),
     ),

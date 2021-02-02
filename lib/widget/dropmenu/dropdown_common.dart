@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mini_widget/mini_widget.dart';
+import 'package:mini_widget/page/base/mixin_state.dart';
 
 enum DropdownEvent {
   // the menu will hide
@@ -71,8 +72,8 @@ class DefaultDropdownMenuController extends StatefulWidget {
   _DefaultDropdownMenuControllerState createState() => new _DefaultDropdownMenuControllerState();
 }
 
-class _DefaultDropdownMenuControllerState extends MiniState<DefaultDropdownMenuController>
-    with SingleTickerProviderStateMixin {
+class _DefaultDropdownMenuControllerState extends State<DefaultDropdownMenuController>
+    with StateMixin, SingleTickerProviderStateMixin {
   DropdownMenuController _controller;
 
   @override
@@ -141,7 +142,7 @@ abstract class DropdownWidget extends StatefulWidget {
   DropdownState<DropdownWidget> createState();
 }
 
-abstract class DropdownState<T extends DropdownWidget> extends MiniState<T> {
+abstract class DropdownState<T extends DropdownWidget> extends State<T> with StateMixin{
   DropdownMenuController controller;
 
   @override

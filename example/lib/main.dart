@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends MiniState<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with StateMixin{
   List<Widget> items = [];
   @override
   void afterBuild(Duration timestamp) {

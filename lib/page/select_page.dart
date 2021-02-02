@@ -26,7 +26,10 @@ class SelectPage<T> extends MiniDetailPage {
     this.showSearchBar = false,
   }) {
     _child = SelectWidget<T>(data,
-        buildCheckChild: buildCheckChild, selectedData: selectedData, compare: compare, multiple: multiple);
+        buildCheckChild: buildCheckChild,
+        selectedData: selectedData,
+        compare: compare,
+        multiple: multiple);
     controller.addListener(() {
       _child?.search(controller.text.trim());
     });
@@ -50,7 +53,7 @@ class SelectPage<T> extends MiniDetailPage {
       onPressed: () {
         List<T> temp = _child.getSelected();
         if (temp.length == 0) {
-          showMessage('未选择任何内容！',context);
+          showMessage('未选择任何内容！', context);
           return;
         } else {
           back(context, success: true, items: temp);
@@ -61,15 +64,17 @@ class SelectPage<T> extends MiniDetailPage {
 
   @override
   Widget buildTitle(BuildContext context) {
-    return showSearchBar ? buildSearchCell(controller: controller, hint: title ?? '') : Text(title ?? '');
+    return showSearchBar
+        ? buildSearchCell(controller: controller, hint: title ?? '')
+        : Text(title ?? '');
   }
 
   @override
-  bool back(BuildContext context, {bool success, List<T> items}) {
+  void back(BuildContext context, {bool success, List<T> items}) {
     if (isEmpty(success) || !success) {
-      return super.back(context);
+      super.back(context);
     } else {
-      return Navigator.pop(context, items);
+      Navigator.pop(context, items);
     }
   }
 }

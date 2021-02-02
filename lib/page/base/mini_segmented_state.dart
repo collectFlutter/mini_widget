@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_widget/res/a.dart';
 
-import 'mini_state.dart';
+import 'mixin_state.dart';
 
 /// 分段页面
-abstract class MiniSegmentedState<T extends StatefulWidget> extends MiniState<T> {
+abstract class MiniSegmentedState<T extends StatefulWidget> extends State<T> with StateMixin {
   List<SegmentedModel> _items;
 
   int tabIndex = 0;

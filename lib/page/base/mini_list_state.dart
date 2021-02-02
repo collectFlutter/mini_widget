@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import '../../cell/a.dart';
-
-import '../../tools.dart';
-import 'mini_state.dart';
+import 'package:mini_widget/widget/empty_widget.dart';
+import 'package:mini_widget/widget/loading_list_widget.dart';
+import 'mixin_state.dart';
 
 /// 列表组件
-abstract class MiniListState<T extends StatefulWidget, M> extends MiniState<T> with AutomaticKeepAliveClientMixin {
+abstract class MiniListState<T extends StatefulWidget, M> extends State<T>
+    with StateMixin, AutomaticKeepAliveClientMixin {
+  bool isEdited = false;
   List<M> list = [];
   int pageIndex = 1;
   bool showEmptyWidget = false;
@@ -21,44 +22,40 @@ abstract class MiniListState<T extends StatefulWidget, M> extends MiniState<T> w
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Material(
+    return WillPopScope(child: Material(
       color: getBackgroundColor(),
       child: Container(
         child: EasyRefresh(
           firstRefresh: firstRefresh(),
           emptyWidget: showEmptyWidget
-              ? buildEmptyWidget(
-                  emptyImageAsset: getEmptyImageAsset(),
-                  emptyMessage: getEmptyMessage(),
-                  child: getEmptyChild(),
-                )
+              ? EmptyWidget(
+              emptyImageAsset: getEmptyImageAsset(), emptyMessage: getEmptyMessage(), child: getEmptyChild())
               : list.length == 0
-                  ? buildLoadingListWidget(
-                      itemChild: getLodingChild(),
-                      baseColor: getLodingBaseColor(),
-                      highlightColor: getLodingHighlightColor(),
-                    )
-                  : null,
+              ? LoadingListWidget(
+              itemChild: getLoadingChild(),
+              baseColor: getLoadingBaseColor(),
+              highlightColor: getLoadingHighlightColor())
+              : null,
           child: ListView.builder(
             controller: ScrollController(),
             shrinkWrap: true,
             itemCount: list.length,
-            itemBuilder: (ctx, index) => (index == list.length - 1)
-                ? Column(children: <Widget>[buildItemCell(ctx, list[index], index), SizedBox(height: 80)])
-                : buildItemCell(ctx, list[index], index),
+            itemBuilder: (ctx, index) => buildItemCell(ctx, list[index], index),
           ),
           onRefresh: hasRefresh() ? () => fetchData(false) : null,
           onLoad: hasMore() ? () => fetchData(true) : null,
         ),
       ),
+    ),
+      onWillPop: onSystemBack,
     );
   }
 
-  Widget getLodingChild() => null;
+  Widget getLoadingChild() => null;
 
-  Color getLodingBaseColor() => Colors.grey[300];
+  Color getLoadingBaseColor() => Colors.grey[300];
 
-  Color getLodingHighlightColor() => Colors.grey[100];
+  Color getLoadingHighlightColor() => Colors.grey[100];
 
   Widget getEmptyChild() => null;
 
@@ -72,7 +69,10 @@ abstract class MiniListState<T extends StatefulWidget, M> extends MiniState<T> w
 
   bool hasMore() => true;
 
-  Color getBackgroundColor() => Theme.of(context).backgroundColor;
+  Color getBackgroundColor() =>
+      Theme
+          .of(context)
+          .backgroundColor;
 
   fetchData(bool more) async {
     if (more) {
@@ -84,11 +84,8 @@ abstract class MiniListState<T extends StatefulWidget, M> extends MiniState<T> w
   }
 
   void updateListUI(bool more, List<M> value, {bool show = true}) {
-    if (value.length < 1) {
-      if (more)
-        showMessage('无更多数据！', context);
-      else if (show) showMessage("暂无数据", context);
-    } else {
+    if (value == null) return;
+    if (value.length > 0) {
       if (!more) list.clear();
       list.addAll(value);
     }
@@ -100,4 +97,10 @@ abstract class MiniListState<T extends StatefulWidget, M> extends MiniState<T> w
 
   @override
   bool get wantKeepAlive => false;
+
+  @protected
+  Future<bool> onSystemBack() async {
+    back(success: isEdited);
+    return false;
+  }
 }

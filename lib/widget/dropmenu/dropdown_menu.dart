@@ -37,18 +37,17 @@ class DropdownMenu extends DropdownWidget {
 
   final double maxMenuHeight;
 
-  DropdownMenu(
-      {@required this.menus,
-      DropdownMenuController controller,
-      Duration hideDuration,
-      Duration showDuration,
-      this.onHide,
-      this.blur,
-      Key key,
-      this.maxMenuHeight,
-      Curve hideCurve,
-      this.switchStyle: DropdownMenuShowHideSwitchStyle.animationShowUntilAnimationHideComplete,
-      Curve showCurve})
+  DropdownMenu({@required this.menus,
+    DropdownMenuController controller,
+    Duration hideDuration,
+    Duration showDuration,
+    this.onHide,
+    this.blur = 0.0,
+    Key key,
+    this.maxMenuHeight,
+    Curve hideCurve,
+    this.switchStyle: DropdownMenuShowHideSwitchStyle.animationShowUntilAnimationHideComplete,
+    Curve showCurve})
       : hideDuration = hideDuration ?? new Duration(milliseconds: 150),
         showDuration = showDuration ?? new Duration(milliseconds: 300),
         showCurve = showCurve ?? Curves.fastOutSlowIn,
@@ -163,7 +162,8 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
     return new ClipRect(
       clipper: new SizeClipper(),
       child: new SizedBox(
-          height: _ensureHeight(builder.height), child: _showing.contains(i) ? builder.builder(context) : null),
+          height: _ensureHeight(builder.height),
+          child: _showing.contains(i) ? builder.builder(context) : null),
     );
   }
 
@@ -171,7 +171,7 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
     Widget container = new Container(
       color: Colors.black26,
     );
-
+    print("widget.blur:${widget.blur}");
     container = new BackdropFilter(
         filter: new ui.ImageFilter.blur(
           sigmaY: widget.blur,
@@ -204,7 +204,9 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
           child: new Align(
               alignment: Alignment.topCenter,
               child: new Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Theme
+                    .of(context)
+                    .scaffoldBackgroundColor,
                 child: createMenu(context, widget.menus[i], i),
               ))));
     }
@@ -245,7 +247,8 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
 
   TickerFuture _hide(int index) {
     TickerFuture future =
-        _dropdownAnimations[index].animateTo(0.0, duration: widget.hideDuration, curve: widget.hideCurve);
+    _dropdownAnimations[index].animateTo(
+        0.0, duration: widget.hideDuration, curve: widget.hideCurve);
     return future;
   }
 
@@ -311,7 +314,8 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
 
     _fadeController.animateTo(1.0, duration: widget.showDuration, curve: widget.showCurve);
 
-    return _dropdownAnimations[index].animateTo(1.0, duration: widget.showDuration, curve: widget.showCurve);
+    return _dropdownAnimations[index].animateTo(
+        1.0, duration: widget.showDuration, curve: widget.showCurve);
   }
 
   double _getHeight(dynamic menu) {
@@ -323,7 +327,7 @@ class _DropdownMenuState extends DropdownState<DropdownMenu> with TickerProvider
   double _ensureHeight(double height) {
     final double maxMenuHeight = widget.maxMenuHeight;
     assert(height != null || maxMenuHeight != null,
-        "DropdownMenu.maxMenuHeight and DropdownMenuBuilder.height must not both null");
+    "DropdownMenu.maxMenuHeight and DropdownMenuBuilder.height must not both null");
     if (maxMenuHeight != null) {
       if (height == null) return maxMenuHeight;
       return height > maxMenuHeight ? maxMenuHeight : height;

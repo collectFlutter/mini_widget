@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:mini_tools/mini_tools.dart';
 
 import 'base/mini_state.dart';
+import 'base/mixin_state.dart';
 
 class SplashPage extends StatefulWidget {
   /// 首次显示图片集合
@@ -35,7 +36,7 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends MiniState<SplashPage> {
+class _SplashPageState extends State<SplashPage> with StateMixin{
   TimerUtil _timerUtil;
   int _status = 0;
   bool _isEnd = false;

@@ -16,6 +16,7 @@ import 'dart:io';
 import '../painter/scrawl_painter.dart';
 import '../tools.dart';
 import 'base/mini_state.dart';
+import 'base/mixin_state.dart';
 
 /// 图片涂鸦+显示地理位置, 返回保存后的图片路径
 class ScrawlWithLocationPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class ScrawlWithLocationPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ScrawlWithLocationState();
 }
 
-class _ScrawlWithLocationState extends MiniState<ScrawlWithLocationPage> {
+class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateMixin{
   double rotateX = 0;
   double scale = 1;
   String location = '';
@@ -452,7 +453,9 @@ class _ScrawlWithLocationState extends MiniState<ScrawlWithLocationPage> {
       return;
     }
     File scrawlImageFile = await FileUtil.saveImg(imgList, 'scrawl');
-    Navigator.pop(context, scrawlImageFile);
+    print("图片地址：${scrawlImageFile?.path}");
+    Navigator.of(context).pop(scrawlImageFile?.path);
+    // Navigator.pop(context, scrawlImageFile);
   }
 
   void reset() {
