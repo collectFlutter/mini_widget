@@ -70,9 +70,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
   }
 
   void _checkPermission() async {
-    await Permission.locationAlways.request();
+    await Permission.location.request();
     AmapLocation.listenLocation(needAddress: true).listen((value) async {
-      String address = await value.address;
+      String address = value.address;
       location = address ?? "";
       setState(() {});
     });

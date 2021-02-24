@@ -17,7 +17,7 @@ dependencies:
   flutter_svg: ^0.18.1
   oktoast: ^2.2.0
   flutter_widget_from_html: ^0.3.1-rc
-  permission_handler: ^5.0.0+hotfix.1
+  permission_handler: ^5.0.1+1
   amap_location_fluttify: ^0.10.0+e74b91b
   flutter_spinkit: ^4.1.2+1
   qr_flutter: ^3.2.0

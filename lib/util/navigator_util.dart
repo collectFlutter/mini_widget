@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mini_widget/global/mini_global.dart';
+import 'package:mini_widget/mini_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -50,12 +51,11 @@ class MiniNavigatorUtil {
       Navigator.push(
         context,
         new CupertinoPageRoute<void>(
-          builder: (ctx) =>
-              WebViewPage(
-                title: title,
-                titleId: titleId,
-                url: url,
-              ),
+          builder: (ctx) => WebViewPage(
+            title: title,
+            titleId: titleId,
+            url: url,
+          ),
         ),
       );
     }
@@ -89,28 +89,30 @@ class MiniNavigatorUtil {
   /// 拍照+涂鸦(位置信息)
   static Future<String> cameraImageAndScrawl(BuildContext context,
       {bool hasScrawl = true, String appName, String authorName, Widget appLogo}) async {
-    await Permission.camera.request();
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    if (image == null) return null;
-    showLoadingDialog(context);
-    print('图片路径${image.path}');
-    File compressFile1 = await FileUtil.compressWithFile(image.path);
-    Rect rect = await WidgetUtil.getImageWH(localUrl: compressFile1.path);
-    double w = rect.width;
-    double h = rect.height;
-    File compressFile = await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
-    print('压缩后路径：${compressFile.path}');
-    Navigator.pop(context);
-    if (!hasScrawl) return compressFile.path;
-    await Permission.location.request();
-    return await getScrawlImage(context, imagePath: compressFile.path);
+    if (await Permission.camera.request().isGranted) {
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      if (image == null) return null;
+      showLoadingDialog(context);
+      print('图片路径${image.path}');
+      File compressFile1 = await FileUtil.compressWithFile(image.path);
+      Rect rect = await WidgetUtil.getImageWH(localUrl: compressFile1.path);
+      double w = rect.width;
+      double h = rect.height;
+      File compressFile = await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
+      print('压缩后路径：${compressFile.path}');
+      Navigator.pop(context);
+      if (!hasScrawl) return compressFile.path;
+      // await Permission.location.request();
+      return await getScrawlImage(context, imagePath: compressFile.path);
+    }
+    return null;
   }
 
   static Future<String> getScrawlImage(BuildContext context,
       {String imagePath,
-        List<Color> colors = const [Colors.redAccent, Colors.lightBlueAccent],
-        bool enableTransform = true,
-        backColor = Colors.black12}) async {
+      List<Color> colors = const [Colors.redAccent, Colors.lightBlueAccent],
+      bool enableTransform = true,
+      backColor = Colors.black12}) async {
     var scrawlImage = await pushPage(
         context,
         ScrawlWithLocationPage(imagePath,
