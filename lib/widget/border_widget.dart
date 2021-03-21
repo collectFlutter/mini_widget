@@ -17,7 +17,7 @@ class BorderWidget extends StatelessWidget {
   BorderWidget(
       {this.backColor,
       this.width,
-        this.height,
+      this.height,
       @required this.label,
       this.fontSize = 8,
       this.textColor = Colors.white,
@@ -48,7 +48,10 @@ class BorderWidget extends StatelessWidget {
         child: Text(
           label ?? '',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: this.textColor, fontSize: fontSize, fontWeight: fontWeight),
+          style: TextStyle(
+              color: this.textColor,
+              fontSize: fontSize,
+              fontWeight: fontWeight),
         ),
       ),
     );

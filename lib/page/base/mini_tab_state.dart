@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'mini_list_state.dart';
 
 /// 表格列表，支持左右滑动
-abstract class MiniTabListState<T extends StatefulWidget, M> extends MiniListState<T, M> {
+abstract class MiniTabListState<T extends StatefulWidget, M>
+    extends MiniListState<T, M> {
   final ScrollController controllerTitle;
 
   final List<ScrollController> controllers = [];
@@ -32,5 +33,6 @@ abstract class MiniTabListState<T extends StatefulWidget, M> extends MiniListSta
     return buildTabItemCell(ctx, item, index, controllers.last);
   }
 
-  Widget buildTabItemCell(BuildContext ctx, M item, int index, ScrollController controller);
+  Widget buildTabItemCell(
+      BuildContext ctx, M item, int index, ScrollController controller);
 }

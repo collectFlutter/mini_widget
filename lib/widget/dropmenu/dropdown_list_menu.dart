@@ -40,8 +40,10 @@ class _MenuListState<T> extends DropdownState<DropdownListMenu<T>> {
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
-    _list =
-        List.generate(widget.data.length, (index) => CheckItem(check: index == _selectedIndex, t: widget.data[index]));
+    _list = List.generate(
+        widget.data.length,
+        (index) =>
+            CheckItem(check: index == _selectedIndex, t: widget.data[index]));
     super.initState();
   }
 
@@ -60,7 +62,10 @@ class _MenuListState<T> extends DropdownState<DropdownListMenu<T>> {
         } else {
           if (widget.menuItemOnTap != null) widget.menuItemOnTap(data, index);
           _selectedIndex = index;
-          List.generate(_list.length, (generator) => _list[generator].check = generator == _selectedIndex);
+          List.generate(
+              _list.length,
+              (generator) =>
+                  _list[generator].check = generator == _selectedIndex);
           setState(() {});
           controller.select(data, index: index);
         }
@@ -258,8 +263,8 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
   Widget buildSubItem(BuildContext context, int index) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child:
-          widget.subItemBuilder(context, _subData[index], _activeIndex == _selectedIndex && index == _subSelectedIndex),
+      child: widget.subItemBuilder(context, _subData[index],
+          _activeIndex == _selectedIndex && index == _subSelectedIndex),
       onTap: () {
         assert(controller != null);
 
@@ -267,8 +272,10 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
         _subSelectedIndex = index;
 
         if (widget.menuTreeOnTap != null)
-          widget.menuTreeOnTap(_data[_activeIndex], _activeIndex, _subData[_subSelectedIndex], _subSelectedIndex);
-        controller.select(_subData[_subSelectedIndex], index: _activeIndex, subIndex: _subSelectedIndex);
+          widget.menuTreeOnTap(_data[_activeIndex], _activeIndex,
+              _subData[_subSelectedIndex], _subSelectedIndex);
+        controller.select(_subData[_subSelectedIndex],
+            index: _activeIndex, subIndex: _subSelectedIndex);
         setState(() {});
       },
     );
@@ -315,7 +322,8 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
                   SliverList(
                       delegate: SliverChildBuilderDelegate(
                     buildSubItem,
-                    childCount: this._subData == null ? 0 : this._subData.length,
+                    childCount:
+                        this._subData == null ? 0 : this._subData.length,
                   ))
                 ],
               ),

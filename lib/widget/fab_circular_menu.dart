@@ -32,7 +32,8 @@ class FabCircularMenu extends StatefulWidget {
   _FabCircularMenuState createState() => _FabCircularMenuState();
 }
 
-class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProviderStateMixin {
+class _FabCircularMenuState extends State<FabCircularMenu>
+    with SingleTickerProviderStateMixin {
   double ringDiameter;
   double ringWidth;
   Color fabColor;
@@ -49,15 +50,20 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
   void initState() {
     super.initState();
 
-    animationController = AnimationController(duration: widget.animationDuration, vsync: this);
+    animationController =
+        AnimationController(duration: widget.animationDuration, vsync: this);
 
-    scaleCurve = CurvedAnimation(parent: animationController, curve: Interval(0.0, 0.4, curve: Curves.easeInOutCirc));
+    scaleCurve = CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.0, 0.4, curve: Curves.easeInOutCirc));
     scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(scaleCurve)
       ..addListener(() {
         setState(() {});
       });
 
-    rotateCurve = CurvedAnimation(parent: animationController, curve: Interval(0.4, 1.0, curve: Curves.easeInOutCirc));
+    rotateCurve = CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.4, 1.0, curve: Curves.easeInOutCirc));
     rotateAnimation = Tween<double>(begin: 1.0, end: 90.0).animate(rotateCurve)
       ..addListener(() {
         setState(() {});
@@ -68,7 +74,8 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    ringDiameter = widget.ringDiameter ?? MediaQuery.of(context).size.width * 1.2;
+    ringDiameter =
+        widget.ringDiameter ?? MediaQuery.of(context).size.width * 1.2;
     ringWidth = widget.ringWidth ?? ringDiameter / 3;
     fabColor = widget.fabColor ?? Theme.of(context).primaryColor;
   }
@@ -82,8 +89,12 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final double bottom = -(scaleAnimation.value * ringDiameter / 2 - 40.0 - (widget.fabMargin.bottom / 2));
-    final double right = -(scaleAnimation.value * ringDiameter / 2 - 40.0 - (widget.fabMargin.right / 2));
+    final double bottom = -(scaleAnimation.value * ringDiameter / 2 -
+        40.0 -
+        (widget.fabMargin.bottom / 2));
+    final double right = -(scaleAnimation.value * ringDiameter / 2 -
+        40.0 -
+        (widget.fabMargin.right / 2));
 
     return Stack(
       alignment: Alignment.bottomRight,
@@ -98,7 +109,9 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
             width: scaleAnimation.value * ringDiameter,
             height: scaleAnimation.value * ringDiameter,
             child: CustomPaint(
-              foregroundPainter: _RingPainter(ringColor: widget.ringColor, ringWidth: scaleAnimation.value * ringWidth),
+              foregroundPainter: _RingPainter(
+                  ringColor: widget.ringColor,
+                  ringWidth: scaleAnimation.value * ringWidth),
             ),
           ),
         ),
@@ -113,7 +126,9 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
               height: scaleAnimation.value * ringDiameter + ringWidth,
               child: Transform.rotate(
                 angle: -(math.pi / rotateAnimation.value),
-                child: Stack(alignment: Alignment.center, children: _applyTranslations(widget.options)),
+                child: Stack(
+                    alignment: Alignment.center,
+                    children: _applyTranslations(widget.options)),
               ),
             ),
             color: Colors.transparent,
@@ -150,7 +165,9 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
     return widgets
         .asMap()
         .map((index, widget) {
-          final double angle = widgets.length == 1 ? 45.0 : 90.0 / (widgets.length * 2 - 2) * (index * 2);
+          final double angle = widgets.length == 1
+              ? 45.0
+              : 90.0 / (widgets.length * 2 - 2) * (index * 2);
           return MapEntry(index, _applyTranslation(angle, widget));
         })
         .values
@@ -161,7 +178,8 @@ class _FabCircularMenuState extends State<FabCircularMenu> with SingleTickerProv
     final double rad = vector.radians(angle);
     return Transform(
       transform: Matrix4.identity()
-        ..translate(-(ringDiameter / 2) * math.cos(rad), -(ringDiameter / 2) * math.sin(rad)),
+        ..translate(-(ringDiameter / 2) * math.cos(rad),
+            -(ringDiameter / 2) * math.sin(rad)),
       child: Transform(
         child: widget,
         transform: Matrix4.rotationZ(math.pi / rotateAnimation.value),

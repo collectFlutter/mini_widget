@@ -45,7 +45,10 @@ Widget buildTagSwitchCell<T>(
                             style: TextStyle(color: tagColor, height: 1.1),
                           ),
                         ),
-                        required ? Icon(MdiIcons.multiplication, size: 8, color: MiniColor.red) : Container(),
+                        required
+                            ? Icon(MdiIcons.multiplication,
+                                size: 8, color: MiniColor.red)
+                            : Container(),
                       ],
                     )),
                 Expanded(
@@ -53,10 +56,15 @@ Widget buildTagSwitchCell<T>(
                     value ?? '',
                     overflow: valueMaxLines == 1 ? TextOverflow.ellipsis : null,
                     maxLines: valueMaxLines,
-                    style: TextStyle(height: 1.1, color: selected ? selectedColor : unSelectedColor),
+                    style: TextStyle(
+                        height: 1.1,
+                        color: selected ? selectedColor : unSelectedColor),
                   ),
                 ),
-                CupertinoSwitch(value: selected, onChanged: isEdit ? onChange : null, activeColor: selectedColor),
+                CupertinoSwitch(
+                    value: selected,
+                    onChanged: isEdit ? onChange : null,
+                    activeColor: selectedColor),
                 SizedBox(width: paddingRight)
               ],
             ),

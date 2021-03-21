@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.light,
             color: Colors.white,
             iconTheme: IconThemeData(color: Colors.blue),
-            textTheme: TextTheme(title: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            textTheme: TextTheme(
+                title: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
             elevation: 0.5,
           ),
         ),
@@ -27,11 +29,12 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with StateMixin{
+class _MyHomePageState extends State<MyHomePage> with StateMixin {
   List<Widget> items = [];
   @override
   void afterBuild(Duration timestamp) {
-    MiniWidget.init('MiniWidget', Icon(Icons.android, color: Colors.green), userName: 'yshye');
+    MiniWidget.init('MiniWidget', Icon(Icons.android, color: Colors.green),
+        userName: 'yshye');
   }
 
   @override
@@ -46,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> with StateMixin{
           if (index.isOdd) return Divider(height: 2);
           return ListTile(
             title: Text(pages[index ~/ 2]['label']),
-            onTap: () => MiniNavigatorUtil.pushPage(context, pages[index ~/ 2]['page']),
+            onTap: () =>
+                MiniNavigatorUtil.pushPage(context, pages[index ~/ 2]['page']),
           );
         },
       ),

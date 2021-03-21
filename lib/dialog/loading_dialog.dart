@@ -13,7 +13,8 @@ class LoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPadding(
-      padding: MediaQuery.of(context).viewInsets + const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+      padding: MediaQuery.of(context).viewInsets +
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
       duration: const Duration(milliseconds: 120),
       curve: Curves.easeInCubic,
       child: MediaQuery.removeViewInsets(
@@ -30,17 +31,20 @@ class LoadingDialog extends StatelessWidget {
               width: 120.0,
               decoration: ShapeDecoration(
                   color: const Color(0xFF3A3A3A),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0)))),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Theme(
-                    data: ThemeData(cupertinoOverrideTheme: CupertinoThemeData(brightness: Brightness.dark)),
+                    data: ThemeData(
+                        cupertinoOverrideTheme:
+                            CupertinoThemeData(brightness: Brightness.dark)),
                     child: const CupertinoActivityIndicator(radius: 14.0),
                   ),
                   SizedBox(height: 20),
                   Text(
-                    hintText??'正在处理...',
+                    hintText ?? '正在处理...',
                     style: const TextStyle(color: Colors.white),
                   )
                 ],
@@ -54,11 +58,11 @@ class LoadingDialog extends StatelessWidget {
 }
 
 void showLoadingDialog(
-    BuildContext context, {
-      String hintText,
-      bool barrierDismissible = false,
-      Future<bool> Function() onWillPop,
-    }) {
+  BuildContext context, {
+  String hintText,
+  bool barrierDismissible = false,
+  Future<bool> Function() onWillPop,
+}) {
   showDialog(
     context: context,
     barrierDismissible: false,

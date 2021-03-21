@@ -37,10 +37,12 @@ mixin StateMixin<T extends StatefulWidget> on State<T> {
   void pop() => MiniNavigatorUtil.pop(context);
 
   @protected
-  void back({@required bool success}) => MiniNavigatorUtil.pop(context, success: success);
+  void back({@required bool success}) =>
+      MiniNavigatorUtil.pop(context, success: success);
 
   @protected
-  Future<dynamic> pushPage(Widget page) => MiniNavigatorUtil.pushPage(context, page);
+  Future<dynamic> pushPage(Widget page) =>
+      MiniNavigatorUtil.pushPage(context, page);
 
   /// 显示自定义对话框
   // Future showCustomDialog(Widget dialog, {bool barrierDismissible = true}) =>
@@ -124,7 +126,9 @@ mixin StateMixin<T extends StatefulWidget> on State<T> {
   Widget buildLodingWidget() {
     return Center(
       child: Theme(
-        data: ThemeData(cupertinoOverrideTheme: CupertinoThemeData(brightness: Brightness.light)),
+        data: ThemeData(
+            cupertinoOverrideTheme:
+                CupertinoThemeData(brightness: Brightness.light)),
         child: const CupertinoActivityIndicator(radius: 14.0),
       ),
     );
@@ -132,7 +136,8 @@ mixin StateMixin<T extends StatefulWidget> on State<T> {
 
   @protected
   bottomSheetListMenu<T>(String title, List<T> item,
-          {ValueChanged<int> voidItemCallback, BuildCheckChild<T> buildCheckChild}) =>
+          {ValueChanged<int> voidItemCallback,
+          BuildCheckChild<T> buildCheckChild}) =>
       showBottomPopup(context, title, item, buildCheckChild: buildCheckChild)
           .then(voidItemCallback);
 

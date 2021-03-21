@@ -198,6 +198,8 @@ class _BadgeWidgetState extends State<BadgeWidget> {
           color: widget.borderColor,
           width: widget.borderSize,
         ),
-        borderRadius: widget.isRounded == true ? new BorderRadius.circular(100.0) : new BorderRadius.circular(0.0));
+        borderRadius: widget.isRounded == true
+            ? new BorderRadius.circular(100.0)
+            : new BorderRadius.circular(0.0));
   }
 }

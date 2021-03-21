@@ -36,13 +36,16 @@ class MiniColor {
   static const Color tagBackColor = Color.fromARGB(25, 51, 51, 255);
 
   /// 报表-背景-浅蓝
-  static const Color reportBackgroundColor1 = Color.fromARGB(255, 216, 223, 241);
+  static const Color reportBackgroundColor1 =
+      Color.fromARGB(255, 216, 223, 241);
 
   /// 报表-背景-浅蓝
-  static const Color reportBackgroundColor2 = Color.fromARGB(255, 236, 241, 249);
+  static const Color reportBackgroundColor2 =
+      Color.fromARGB(255, 236, 241, 249);
 
   /// 报表-背景-纯色浅蓝
-  static const Color reportBackgroundColor3 = Color.fromARGB(255, 236, 241, 249);
+  static const Color reportBackgroundColor3 =
+      Color.fromARGB(255, 236, 241, 249);
 
   /// 报表-不太重要的数据-浅红
   static const Color reportUnImportRed = Color.fromARGB(255, 250, 190, 175);

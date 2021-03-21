@@ -14,14 +14,16 @@ class RotateContainer extends StatefulWidget {
   RotateContainer({this.endAngle, this.child, this.rotated = false});
 }
 
-class _RotateContainerState extends State<RotateContainer> with SingleTickerProviderStateMixin {
+class _RotateContainerState extends State<RotateContainer>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   double angle = 0;
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _animation = Tween(begin: 0.0, end: widget.endAngle).animate(_controller)
       ..addListener(() {
         setState(() {

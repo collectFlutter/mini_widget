@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../res/a.dart';
 
 /// 空视图
-Widget buildEmptyWidget({Widget child, String emptyImageAsset, String emptyMessage = '暂无内容！'}) {
+Widget buildEmptyWidget(
+    {Widget child, String emptyImageAsset, String emptyMessage = '暂无内容！'}) {
   assert(emptyMessage != null && emptyImageAsset != null);
   return ListView.builder(
     itemCount: 1,

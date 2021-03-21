@@ -28,8 +28,9 @@ class TabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _minWidth =
-        headers.length < 6 ? NumUtil.divide(MediaQuery.of(context).size.width, headers.length) - 2 : columnItemWidth;
+    double _minWidth = headers.length < 6
+        ? NumUtil.divide(MediaQuery.of(context).size.width, headers.length) - 2
+        : columnItemWidth;
     List<Widget> items = [];
     // 表头
     items.add(
@@ -41,7 +42,9 @@ class TabWidget extends StatelessWidget {
                 color: headerColor ?? Theme.of(context).primaryColor,
                 width: _minWidth,
                 alignment: Alignment.center,
-                child: Text(title, style: headerTextStyle?? MiniStyle.textTag.copyWith(color: MiniColor.white)));
+                child: Text(title,
+                    style: headerTextStyle ??
+                        MiniStyle.textTag.copyWith(color: MiniColor.white)));
           }).toList())),
     );
     // 表身
@@ -55,11 +58,14 @@ class TabWidget extends StatelessWidget {
               return GestureDetector(
                 onTap: rowItem.onTop,
                 child: Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5, right: 3, left: 3),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 5, right: 3, left: 3),
                     width: _minWidth,
                     alignment: Alignment.center,
                     child: Text(rowItem.label,
-                        style: MiniStyle.textDarkNormal.copyWith(fontSize: MiniDimen.fontSmall, color: rowItem.color))),
+                        style: MiniStyle.textDarkNormal.copyWith(
+                            fontSize: MiniDimen.fontSmall,
+                            color: rowItem.color))),
               );
             }).toList(),
           ),

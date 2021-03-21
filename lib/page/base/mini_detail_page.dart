@@ -8,7 +8,9 @@ abstract class MiniDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(context),
       body: Container(
-          color: MiniColor.background, alignment: Alignment.center, child: buildBody(context) ?? Text('正在加载数据…')),
+          color: MiniColor.background,
+          alignment: Alignment.center,
+          child: buildBody(context) ?? Text('正在加载数据…')),
       endDrawer: buildEndDrawer(context),
       bottomNavigationBar: buildBottomAppBar(context),
       floatingActionButton: buildFloatingActionButton(context),

@@ -49,7 +49,8 @@ class DropdownHeader extends DropdownWidget {
 }
 
 class _DropdownHeaderState extends DropdownState<DropdownHeader> {
-  Widget buildIconItem(BuildContext context, IconData iconData, bool selected, int index) {
+  Widget buildIconItem(
+      BuildContext context, IconData iconData, bool selected, int index) {
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color unselectedColor = Theme.of(context).unselectedWidgetColor;
     return IconButton(
@@ -78,7 +79,8 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
     );
   }
 
-  Widget buildItem(BuildContext context, dynamic title, bool selected, int index) {
+  Widget buildItem(
+      BuildContext context, dynamic title, bool selected, int index) {
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color unselectedColor = Theme.of(context).unselectedWidgetColor;
     final GetItemLabel getItemLabel = widget.getItemLabel;
@@ -88,7 +90,9 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
       child: Padding(
           padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 5.0),
           child: DecoratedBox(
-              decoration: BoxDecoration(border: null), //Border(left: Divider.createBorderSide(context))),
+              decoration: BoxDecoration(
+                  border:
+                      null), //Border(left: Divider.createBorderSide(context))),
               child: Center(
                   child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 Expanded(
@@ -102,7 +106,11 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
                   ),
                 ),
                 Icon(
-                  title is IconData ? title : (selected ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+                  title is IconData
+                      ? title
+                      : (selected
+                          ? Icons.arrow_drop_up
+                          : Icons.arrow_drop_down),
                   color: selected ? primaryColor : unselectedColor,
                 )
               ])))),
@@ -165,7 +173,8 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
           if (_activeIndex == null) return;
           setState(() {
             _activeIndex = null;
-            if (!widget.updateTitle || _titles[controller.menuIndex] is IconData) return;
+            if (!widget.updateTitle ||
+                _titles[controller.menuIndex] is IconData) return;
             String label = widget.getItemLabel(controller.data);
             _titles[controller.menuIndex] = label;
           });

@@ -18,7 +18,11 @@ class SelectWidget<T> extends StatefulWidget {
   /// 是否支持多选
   final bool multiple;
 
-  SelectWidget(this.data, {this.buildCheckChild, this.selectedData, this.compare, this.multiple = true});
+  SelectWidget(this.data,
+      {this.buildCheckChild,
+      this.selectedData,
+      this.compare,
+      this.multiple = true});
 
   @override
   _SelectWidgetState createState() => _state;
@@ -54,7 +58,8 @@ class _SelectWidgetState extends State<SelectWidget> {
               break;
             }
           } else {
-            if (widget.selectedData[i][widget.titleKey] == item[widget.titleKey]) {
+            if (widget.selectedData[i][widget.titleKey] ==
+                item[widget.titleKey]) {
               flag = true;
               break;
             }

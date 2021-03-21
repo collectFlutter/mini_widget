@@ -5,7 +5,8 @@ import 'package:mini_widget/res/a.dart';
 import 'mixin_state.dart';
 
 /// 分段页面
-abstract class MiniSegmentedState<T extends StatefulWidget> extends State<T> with StateMixin {
+abstract class MiniSegmentedState<T extends StatefulWidget> extends State<T>
+    with StateMixin {
   List<SegmentedModel> _items;
 
   int tabIndex = 0;
@@ -59,12 +60,14 @@ abstract class MiniSegmentedState<T extends StatefulWidget> extends State<T> wit
             selectedColor: getSelectedColor(),
             unselectedColor: getUnSelectedColor(),
             onValueChanged: (index) => setState(() => tabIndex = index),
-            children: _items.map((f) => buildSegmentedBar(f.label)).toList().asMap(),
+            children:
+                _items.map((f) => buildSegmentedBar(f.label)).toList().asMap(),
             groupValue: tabIndex,
           ),
         ),
       ),
-      body: IndexedStack(children: _items.map((f) => f.child).toList(), index: tabIndex),
+      body: IndexedStack(
+          children: _items.map((f) => f.child).toList(), index: tabIndex),
       floatingActionButton: buildFloatingActionButton(),
       bottomNavigationBar: buildNavigationButton(),
     );

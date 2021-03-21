@@ -55,7 +55,9 @@ class ProgressWidget extends StatelessWidget {
                           height: 1,
                           color: isState
                               ? Colors.transparent
-                              : model.checked ? Colors.blue : Colors.grey),
+                              : model.checked
+                                  ? Colors.blue
+                                  : Colors.grey),
                     ),
                     Icon(
                       model.close
@@ -65,7 +67,9 @@ class ProgressWidget extends StatelessWidget {
                               : MdiIcons.circle,
                       color: model.close
                           ? Colors.red
-                          : model.checked ? Colors.blue : Colors.grey,
+                          : model.checked
+                              ? Colors.blue
+                              : Colors.grey,
                       size: 14,
                     ),
                     Expanded(
@@ -74,7 +78,9 @@ class ProgressWidget extends StatelessWidget {
                           height: 1,
                           color: isEnd
                               ? Colors.transparent
-                              : nextCheck ? Colors.blue : Colors.grey),
+                              : nextCheck
+                                  ? Colors.blue
+                                  : Colors.grey),
                     ),
                   ],
                 ),
@@ -91,7 +97,9 @@ class ProgressWidget extends StatelessWidget {
                   style: TextStyle(
                       color: model.close
                           ? Colors.red
-                          : model.checked ? Colors.blue : Colors.grey,
+                          : model.checked
+                              ? Colors.blue
+                              : Colors.grey,
                       fontSize: 12),
                 )),
           ),
@@ -107,7 +115,9 @@ class ProgressWidget extends StatelessWidget {
                 style: TextStyle(
                     color: model.close
                         ? Colors.red
-                        : model.checked ? Colors.blue : Colors.grey,
+                        : model.checked
+                            ? Colors.blue
+                            : Colors.grey,
                     fontSize: 12),
               ),
             ),

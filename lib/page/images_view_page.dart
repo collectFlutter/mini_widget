@@ -10,7 +10,8 @@ class ImagesViewPage extends StatefulWidget {
   final List<String> imgUrls;
   final double width;
 
-  ImagesViewPage({Key key, this.defaultIndex = 0, this.imgUrls, this.width}) : super(key: key) {
+  ImagesViewPage({Key key, this.defaultIndex = 0, this.imgUrls, this.width})
+      : super(key: key) {
     assert(imgUrls != null);
     assert(defaultIndex >= 0 && defaultIndex < imgUrls.length);
     assert(width != null);
@@ -56,7 +57,8 @@ class _PageStatus extends State<ImagesViewPage> {
   void initState() {
     //页面初始化
     super.initState();
-    _scrollController = ScrollController(initialScrollOffset: widget.width * (widget.defaultIndex));
+    _scrollController = ScrollController(
+        initialScrollOffset: widget.width * (widget.defaultIndex));
     setState(() {
       image = widget.imgUrls[widget.defaultIndex];
       index = widget.defaultIndex + 1;
@@ -138,13 +140,18 @@ class _PageStatus extends State<ImagesViewPage> {
             onTap: () => Navigator.pop(context),
             child: Container(
               width: w,
-              child: UrlUtil.isUrl(url) ? Image.network(url) : Image.file(File(url)),
+              child: UrlUtil.isUrl(url)
+                  ? Image.network(url)
+                  : Image.file(File(url)),
             ),
           ),
         ),
       );
     });
-    return ListView(controller: _scrollController, scrollDirection: Axis.horizontal, children: array);
+    return ListView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        children: array);
   }
 
   @override

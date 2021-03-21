@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void showSimpleDialog(BuildContext context, List<String> item, {String title, ValueChanged<int> voidItemCallback}) {
+void showSimpleDialog(BuildContext context, List<String> item,
+    {String title, ValueChanged<int> voidItemCallback}) {
   assert(item != null);
   int length = item.length;
   if (length < 1) return;

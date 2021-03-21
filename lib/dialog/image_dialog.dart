@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -11,12 +10,7 @@ void showImageDialog(BuildContext context, String imgUrl, {String label = ""}) {
       title: Text(label),
       content: Column(
         children: <Widget>[
-          CachedNetworkImage(
-            imageUrl: imgUrl,
-            width: 250,
-            height: 250,
-            errorWidget: (ctx, url, _) => Icon(Icons.error, color: Colors.red),
-          ),
+          Image.network(imgUrl ?? '', width: 250, height: 250),
         ],
       ),
       actions: <Widget>[

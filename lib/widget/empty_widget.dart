@@ -33,7 +33,12 @@ class EmptyWidget extends StatelessWidget {
                 Text(
                   emptyMessage,
                   style: TextStyle(
-                    color: emptyMessageColor ?? Theme.of(context).textTheme.bodyText2.color.withAlpha(100),
+                    color: emptyMessageColor ??
+                        Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            .color
+                            .withAlpha(100),
                   ),
                 ),
               ],

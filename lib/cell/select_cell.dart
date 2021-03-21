@@ -39,7 +39,9 @@ Widget buildTagSelectCell<T>(
                     if (items == null || items.length < 1) {
                       onItemSelected(-1);
                     }
-                    showBottomPopup(context, '请选择$tag', items, buildCheckChild: buildCheckChild).then((index) {
+                    showBottomPopup(context, '请选择$tag', items,
+                            buildCheckChild: buildCheckChild)
+                        .then((index) {
                       if (index == null || index < 0) return;
                       onItemSelected(index);
                     });
@@ -61,10 +63,14 @@ Widget buildTagSelectCell<T>(
                             tag,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(color: MiniColor.gray, height: 1.1),
+                            style:
+                                TextStyle(color: MiniColor.gray, height: 1.1),
                           ),
                         ),
-                        required ? Icon(MdiIcons.multiplication, size: 8, color: MiniColor.red) : Container(),
+                        required
+                            ? Icon(MdiIcons.multiplication,
+                                size: 8, color: MiniColor.red)
+                            : Container(),
                       ],
                     )),
                 Expanded(

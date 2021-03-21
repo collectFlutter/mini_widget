@@ -143,7 +143,10 @@ Widget build2LineCell(
               children: <Widget>[
                 Text(
                   value,
-                  style: TextStyle(color: valueColor, fontWeight: FontWeight.bold, fontSize: 15),
+                  style: TextStyle(
+                      color: valueColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
@@ -173,8 +176,8 @@ Widget buildTimeLineCell(
     Widget headDefault,
     String title = '',
     String memo = '',
-      String circularLabel = '',
-      Color circularColor = Colors.blue,
+    String circularLabel = '',
+    Color circularColor = Colors.blue,
     bool isState = false,
     bool isEnd = false}) {
   return Material(
@@ -207,15 +210,23 @@ Widget buildTimeLineCell(
                       alignment: Alignment.center,
                       child: Column(
                         children: <Widget>[
-                          Container(height: 15, width: 2, color: isState ? Colors.transparent : Colors.blue),
-                          Container(height: 85, width: 2, color: isEnd ? Colors.transparent : Colors.blue),
+                          Container(
+                              height: 15,
+                              width: 2,
+                              color:
+                                  isState ? Colors.transparent : Colors.blue),
+                          Container(
+                              height: 85,
+                              width: 2,
+                              color: isEnd ? Colors.transparent : Colors.blue),
                         ],
                       ),
                     ),
                     Container(
                       width: 30,
                       height: 30,
-                      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
                       decoration: BoxDecoration(
                           border: Border.all(color: circularColor, width: 1.0),
                           color: circularColor,
@@ -224,7 +235,9 @@ Widget buildTimeLineCell(
                       alignment: Alignment.center,
                       child: UrlUtil.isUrl(headUrl)
                           ? NetworkImage(headUrl)
-                          : Text(circularLabel??'', style: MiniStyle.textTag.copyWith(color: Colors.white)),
+                          : Text(circularLabel ?? '',
+                              style: MiniStyle.textTag
+                                  .copyWith(color: Colors.white)),
                     ),
                   ],
                 ),
@@ -237,13 +250,21 @@ Widget buildTimeLineCell(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(children: <Widget>[BorderWidget(label: title, fontSize: 13)]),
+                      Row(children: <Widget>[
+                        BorderWidget(label: title, fontSize: 13)
+                      ]),
                       SizedBox(height: 5),
                       Text('$dealMan',
-                          style: TextStyle(fontSize: MiniDimen.fontSmall, height: 1.1, color: MiniColor.gray)),
+                          style: TextStyle(
+                              fontSize: MiniDimen.fontSmall,
+                              height: 1.1,
+                              color: MiniColor.gray)),
                       Expanded(
                           child: Text(memo,
-                              style: TextStyle(fontSize: MiniDimen.fontSmall, height: 1.1, color: MiniColor.gray))),
+                              style: TextStyle(
+                                  fontSize: MiniDimen.fontSmall,
+                                  height: 1.1,
+                                  color: MiniColor.gray))),
                     ],
                   ),
                 ),

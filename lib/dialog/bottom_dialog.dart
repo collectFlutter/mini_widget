@@ -48,7 +48,11 @@ void showBottomSheetGridMenu(
           itemCount: _length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: _row,
-            childAspectRatio: _row == 1 ? 2.5 : _row == 2 ? 1.5 : 1.0,
+            childAspectRatio: _row == 1
+                ? 2.5
+                : _row == 2
+                    ? 1.5
+                    : 1.0,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
           ),
@@ -75,7 +79,8 @@ void showBottomSheetGridMenu(
 Future<int> showBottomPopup<T>(BuildContext context, String title, List<T> item,
     {String message, BuildCheckChild<T> buildCheckChild}) async {
   final ThemeData theme = Theme.of(context);
-  final TextStyle dialogTextStyle = theme.textTheme.subhead.copyWith(color: theme.textTheme.caption.color);
+  final TextStyle dialogTextStyle =
+      theme.textTheme.subhead.copyWith(color: theme.textTheme.caption.color);
   List<CupertinoActionSheetAction> itemSheet = [];
   for (var i = 0; i < item.length; ++i) {
     itemSheet.add(
@@ -102,7 +107,8 @@ Future<int> showBottomPopup<T>(BuildContext context, String title, List<T> item,
   );
 }
 
-void showBottomDialog(BuildContext context, Widget child, {bool barrierDismissible = true}) {
+void showBottomDialog(BuildContext context, Widget child,
+    {bool barrierDismissible = true}) {
   showDialog(
       context: context,
       barrierDismissible: barrierDismissible,

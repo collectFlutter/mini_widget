@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DropdownSliverChildBuilderDelegate extends SliverPersistentHeaderDelegate {
+class DropdownSliverChildBuilderDelegate
+    extends SliverPersistentHeaderDelegate {
   WidgetBuilder builder;
 
   DropdownSliverChildBuilderDelegate({this.builder}) : assert(builder != null);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return builder(context);
   }
 

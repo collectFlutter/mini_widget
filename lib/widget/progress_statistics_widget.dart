@@ -47,9 +47,9 @@ class ProgressStatisticsWidget extends StatelessWidget {
     double valueWidth = statisticsWidth;
 
     num total = this.max ?? 0.0;
-    if(total == 0.0){
+    if (total == 0.0) {
       total = this.value;
-    }else{
+    } else {
       valueWidth = statisticsWidth * this.value / total;
     }
 
@@ -71,7 +71,8 @@ class ProgressStatisticsWidget extends StatelessWidget {
       children: <Widget>[
         this.label == null
             ? Container()
-            : Text(label, style: MiniStyle.textTag.copyWith(color: Colors.black)),
+            : Text(label,
+                style: MiniStyle.textTag.copyWith(color: Colors.black)),
         Container(
           height: 20,
           alignment: Alignment.center,

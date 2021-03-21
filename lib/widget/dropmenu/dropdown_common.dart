@@ -50,7 +50,8 @@ class DropdownMenuController extends ChangeNotifier {
   }
 }
 
-typedef DropdownMenuOnSelected({int menuIndex, int index, int subIndex, dynamic data});
+typedef DropdownMenuOnSelected(
+    {int menuIndex, int index, int subIndex, dynamic data});
 
 class DefaultDropdownMenuController extends StatefulWidget {
   const DefaultDropdownMenuController({
@@ -64,15 +65,19 @@ class DefaultDropdownMenuController extends StatefulWidget {
   final DropdownMenuOnSelected onSelected;
 
   static DropdownMenuController of(BuildContext context) {
-    final _DropdownMenuControllerScope scope = context.inheritFromWidgetOfExactType(_DropdownMenuControllerScope);
+    final _DropdownMenuControllerScope scope =
+        context.dependOnInheritedWidgetOfExactType(
+            aspect: _DropdownMenuControllerScope);
     return scope?.controller;
   }
 
   @override
-  _DefaultDropdownMenuControllerState createState() => new _DefaultDropdownMenuControllerState();
+  _DefaultDropdownMenuControllerState createState() =>
+      new _DefaultDropdownMenuControllerState();
 }
 
-class _DefaultDropdownMenuControllerState extends State<DefaultDropdownMenuController>
+class _DefaultDropdownMenuControllerState
+    extends State<DefaultDropdownMenuController>
     with StateMixin, SingleTickerProviderStateMixin {
   DropdownMenuController _controller;
 
@@ -121,7 +126,8 @@ class _DefaultDropdownMenuControllerState extends State<DefaultDropdownMenuContr
 }
 
 class _DropdownMenuControllerScope extends InheritedWidget {
-  const _DropdownMenuControllerScope({Key key, this.controller, this.enabled, Widget child})
+  const _DropdownMenuControllerScope(
+      {Key key, this.controller, this.enabled, Widget child})
       : super(key: key, child: child);
 
   final DropdownMenuController controller;
@@ -142,7 +148,8 @@ abstract class DropdownWidget extends StatefulWidget {
   DropdownState<DropdownWidget> createState();
 }
 
-abstract class DropdownState<T extends DropdownWidget> extends State<T> with StateMixin{
+abstract class DropdownState<T extends DropdownWidget> extends State<T>
+    with StateMixin {
   DropdownMenuController controller;
 
   @override
@@ -194,5 +201,6 @@ class DropdownMenuBuilder {
   final double height;
 
   //if height == null , use [DropdownMenu.maxMenuHeight]
-  DropdownMenuBuilder({@required this.builder, this.height}) : assert(builder != null);
+  DropdownMenuBuilder({@required this.builder, this.height})
+      : assert(builder != null);
 }

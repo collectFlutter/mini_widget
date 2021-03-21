@@ -22,7 +22,10 @@ void showInputDialog(BuildContext context, ValueChanged<String> okCallback,
           children: <Widget>[
             Text(message,
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.2, color: Colors.pinkAccent, fontSize: MiniDimen.fontNormal)),
+                style: TextStyle(
+                    height: 1.2,
+                    color: Colors.pinkAccent,
+                    fontSize: MiniDimen.fontNormal)),
             SingleChildScrollView(
               child: TextField(
                 controller: _controller,
@@ -55,7 +58,8 @@ void showInputDialog(BuildContext context, ValueChanged<String> okCallback,
       actions: <Widget>[
         FlatButton(
           color: MiniColor.warnColor,
-          child: Text(cancelText ?? "取消", style: TextStyle(color: MiniColor.white)),
+          child: Text(cancelText ?? "取消",
+              style: TextStyle(color: MiniColor.white)),
           onPressed: () {
             if (cancelCallback != null) {
               cancelCallback(_controller.text);
@@ -86,7 +90,8 @@ _getInputFormatter(TextInputType keyboardType) {
   if (keyboardType == TextInputType.numberWithOptions(decimal: true)) {
     return [UsNumberTextInputFormatter()];
   }
-  if (keyboardType == TextInputType.number || keyboardType == TextInputType.phone) {
+  if (keyboardType == TextInputType.number ||
+      keyboardType == TextInputType.phone) {
     return [WhitelistingTextInputFormatter.digitsOnly];
   }
   return null;

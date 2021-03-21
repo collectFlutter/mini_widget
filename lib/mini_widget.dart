@@ -24,7 +24,8 @@ class MiniWidget {
   /// [appLogo] - 应用Logo,24×24<br/>
   /// [userName] - 用户名称 <br/>
   /// [amap] - 高德appkey <br/>
-  static void init(String appName, Widget appLogo, {String userName, String amap}) {
+  static void init(String appName, Widget appLogo,
+      {String userName, String amap}) {
     assert(appName != null && appLogo != null);
     miniGlobal = MiniGlobal(appName, userName, appLogo);
     AmapCore.init(amap);

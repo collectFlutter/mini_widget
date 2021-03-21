@@ -22,7 +22,8 @@ class _FormDemoPageState extends MiniDetailState<FormDemoPage> {
     _f2Controller = TextEditingController();
     _f3Controller = TextEditingController();
     _f4Controller = TextEditingController();
-    textControllers.addAll([_f1Controller, _f2Controller, _f3Controller, _f4Controller]);
+    textControllers
+        .addAll([_f1Controller, _f2Controller, _f3Controller, _f4Controller]);
     super.initState();
   }
 
@@ -30,10 +31,17 @@ class _FormDemoPageState extends MiniDetailState<FormDemoPage> {
   Widget buildBody() {
     return ListView(children: <Widget>[
       buildHeadCardCell(headText: '基本信息', values: [
-        EditValueModel(tag: 'form 1', controller: _f1Controller, inputType: TextInputType.number),
+        EditValueModel(
+            tag: 'form 1',
+            controller: _f1Controller,
+            inputType: TextInputType.number),
         EditValueModel(tag: 'form 2', controller: _f2Controller),
-        EditValueModel(tag: 'form 3', controller: _f3Controller, inputType: TextInputType.emailAddress),
-        buildTagSelectCell(context, '满意度', controller: _f4Controller, items: items, onItemSelected: (index) {
+        EditValueModel(
+            tag: 'form 3',
+            controller: _f3Controller,
+            inputType: TextInputType.emailAddress),
+        buildTagSelectCell(context, '满意度',
+            controller: _f4Controller, items: items, onItemSelected: (index) {
           _f4Controller.text = items[index];
         }),
         ImagesWidget(
@@ -61,7 +69,11 @@ class _FormDemoPageState extends MiniDetailState<FormDemoPage> {
 
   @override
   Widget buildNavigationButton() {
-    return RaisedButton(onPressed: () {}, child: Text('提交'), color: Colors.blue, textColor: Colors.white);
+    return RaisedButton(
+        onPressed: () {},
+        child: Text('提交'),
+        color: Colors.blue,
+        textColor: Colors.white);
   }
 
   @override

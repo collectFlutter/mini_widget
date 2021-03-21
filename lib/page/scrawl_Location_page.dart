@@ -44,7 +44,8 @@ class ScrawlWithLocationPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ScrawlWithLocationState();
 }
 
-class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateMixin{
+class _ScrawlWithLocationState extends State<ScrawlWithLocationPage>
+    with StateMixin {
   double rotateX = 0;
   double scale = 1;
   String location = '';
@@ -62,8 +63,12 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
   void initState() {
     super.initState();
     selectedColor = widget.colors[0];
-    paints = [PaintModel(sPoint: [], strokeColor: selectedColor, strokeWidth: strokeWidth)];
-    imageFile = StringUtil.isEmpty(widget.filePath) ? null : File(widget.filePath);
+    paints = [
+      PaintModel(
+          sPoint: [], strokeColor: selectedColor, strokeWidth: strokeWidth)
+    ];
+    imageFile =
+        StringUtil.isEmpty(widget.filePath) ? null : File(widget.filePath);
     if (widget.showLocal) {
       _checkPermission();
     }
@@ -111,11 +116,14 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                               scale: scale,
                               child: Transform(
                                 transform: Matrix4.identity()..rotateZ(rotateX),
-                                origin: Offset(screenWidthDp / 2, screenHeightDp / 2),
+                                origin: Offset(
+                                    screenWidthDp / 2, screenHeightDp / 2),
                                 child: imageFile == null
                                     ? Container()
                                     : Image.file(imageFile,
-                                        fit: BoxFit.fitWidth, width: screenWidthDp, height: screenHeightDp),
+                                        fit: BoxFit.fitWidth,
+                                        width: screenWidthDp,
+                                        height: screenHeightDp),
                               ),
                             )),
                         Positioned(
@@ -123,7 +131,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                           bottom: 0.0,
                           left: 0.0,
                           right: 0.0,
-                          child: Container(alignment: Alignment.center, color: widget.backColor),
+                          child: Container(
+                              alignment: Alignment.center,
+                              color: widget.backColor),
                         ),
                         Positioned(
                           top: 0.0,
@@ -154,7 +164,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                 Positioned(
                   top: 0.0,
                   left: 0.0,
-                  child: widget.enableTransform ? _buildTransformTool(screenHeightDp) : Container(),
+                  child: widget.enableTransform
+                      ? _buildTransformTool(screenHeightDp)
+                      : Container(),
                 )
               ],
             ),
@@ -167,7 +179,11 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
     return Container(
       width: 200,
       child: Row(children: <Widget>[
-        Container(width: 2, height: 70, color: Colors.white, alignment: Alignment.center),
+        Container(
+            width: 2,
+            height: 70,
+            color: Colors.white,
+            alignment: Alignment.center),
         SizedBox(width: 10),
         Expanded(
           child: Column(
@@ -175,8 +191,10 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                DateUtil.getDateStrByDateTime(DateTime.now(), format: DateFormat.HOUR_MINUTE),
-                style: MiniStyle.textTitle.copyWith(color: Colors.white, fontSize: 24),
+                DateUtil.getDateStrByDateTime(DateTime.now(),
+                    format: DateFormat.HOUR_MINUTE),
+                style: MiniStyle.textTitle
+                    .copyWith(color: Colors.white, fontSize: 24),
               ),
               Text(
                 "${DateUtil.getDateStrByDateTime(DateTime.now(), format: DateFormat.YEAR_MONTH_DAY)}  ${DateUtil.getZHWeekDay(DateTime.now())}",
@@ -184,8 +202,14 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
               ),
               Row(
                 children: <Widget>[
-                  Container(height: 30, width: 30, padding: EdgeInsets.all(5), child: widget.appLogo),
-                  Text(widget.appName, style: MiniStyle.textTag.copyWith(color: MiniColor.lightGray)),
+                  Container(
+                      height: 30,
+                      width: 30,
+                      padding: EdgeInsets.all(5),
+                      child: widget.appLogo),
+                  Text(widget.appName,
+                      style: MiniStyle.textTag
+                          .copyWith(color: MiniColor.lightGray)),
                 ],
               ),
             ],
@@ -204,14 +228,19 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
             children: <Widget>[
               Icon(Icons.person, color: Colors.white, size: 16),
               Text(widget.authorName,
-                  softWrap: true, maxLines: 2, style: MiniStyle.textTag.copyWith(color: Colors.white))
+                  softWrap: true,
+                  maxLines: 2,
+                  style: MiniStyle.textTag.copyWith(color: Colors.white))
             ],
           ),
           SizedBox(height: 5),
           Row(
             children: <Widget>[
               Icon(Icons.person_pin_circle, color: Colors.white, size: 16),
-              Text(location, softWrap: true, maxLines: 2, style: MiniStyle.textTag.copyWith(color: Colors.white))
+              Text(location,
+                  softWrap: true,
+                  maxLines: 2,
+                  style: MiniStyle.textTag.copyWith(color: Colors.white))
             ],
           ),
         ],
@@ -226,13 +255,17 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
         child: GestureDetector(
           onPanUpdate: (details) {
             RenderBox referenceBox = context.findRenderObject();
-            Offset localPosition = referenceBox.globalToLocal(details.globalPosition);
+            Offset localPosition =
+                referenceBox.globalToLocal(details.globalPosition);
             state(() {
               paints.last.sPoint.add(localPosition);
             });
           },
           onPanStart: (details) {
-            paints.add(PaintModel(sPoint: [], strokeWidth: strokeWidth, strokeColor: selectedColor));
+            paints.add(PaintModel(
+                sPoint: [],
+                strokeWidth: strokeWidth,
+                strokeColor: selectedColor));
           },
         ),
       );
@@ -272,7 +305,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                     child: Icon(
                       Icons.brightness_1,
                       size: 10.0,
-                      color: selectedLine == 0 ? Colors.white : Colors.grey.withOpacity(0.5),
+                      color: selectedLine == 0
+                          ? Colors.white
+                          : Colors.grey.withOpacity(0.5),
                     ),
                   ),
                   onTap: () {
@@ -288,7 +323,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                     child: Icon(
                       Icons.brightness_1,
                       size: 15.0,
-                      color: selectedLine == 1 ? Colors.white : Colors.grey.withOpacity(0.5),
+                      color: selectedLine == 1
+                          ? Colors.white
+                          : Colors.grey.withOpacity(0.5),
                     ),
                   ),
                   onTap: () {
@@ -304,7 +341,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                     child: Icon(
                       Icons.brightness_1,
                       size: 20.0,
-                      color: selectedLine == 2 ? Colors.white : Colors.grey.withOpacity(0.5),
+                      color: selectedLine == 2
+                          ? Colors.white
+                          : Colors.grey.withOpacity(0.5),
                     ),
                   ),
                   onTap: () {
@@ -317,7 +356,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                   child: Container(
                     width: 35,
                     height: 35,
-                    color: selectedColor == widget.colors[0] ? Colors.grey.withOpacity(0.2) : Colors.transparent,
+                    color: selectedColor == widget.colors[0]
+                        ? Colors.grey.withOpacity(0.2)
+                        : Colors.transparent,
                     child: Icon(
                       Icons.create,
                       color: widget.colors[0],
@@ -333,7 +374,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
                   child: Container(
                     width: 35,
                     height: 35,
-                    color: selectedColor == widget.colors[1] ? Colors.grey.withOpacity(0.2) : Colors.transparent,
+                    color: selectedColor == widget.colors[1]
+                        ? Colors.grey.withOpacity(0.2)
+                        : Colors.transparent,
                     child: Icon(
                       Icons.create,
                       color: widget.colors[1],
@@ -351,7 +394,9 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
             GestureDetector(
               child: Container(
                 height: 40,
-                child: Text('重绘', style: MiniStyle.textTitle.copyWith(color: Colors.pinkAccent)),
+                child: Text('重绘',
+                    style:
+                        MiniStyle.textTitle.copyWith(color: Colors.pinkAccent)),
               ),
               onTap: () {
                 setState(() {
@@ -362,15 +407,17 @@ class _ScrawlWithLocationState extends State<ScrawlWithLocationPage> with StateM
             GestureDetector(
               child: Container(
                 height: 40,
-                child: Text('确认', style: MiniStyle.textTitle.copyWith(color: Colors.white)),
+                child: Text('确认',
+                    style: MiniStyle.textTitle.copyWith(color: Colors.white)),
               ),
               onTap: () {
                 showLoadingDialog(context);
-                RenderRepaintBoundary boundary = _repaintKey.currentContext.findRenderObject();
+                RenderRepaintBoundary boundary =
+                    _repaintKey.currentContext.findRenderObject();
                 FileUtil.capturePng2List(boundary).then((Uint8List item) {
                   pop();
                   if (item == null || item.length == 0) {
-                    showMessage('绘制失败，请退出重试！',context);
+                    showMessage('绘制失败，请退出重试！', context);
                     return;
                   }
                   back(imgList: item, success: true);

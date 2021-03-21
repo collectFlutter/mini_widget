@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'mixin_state.dart';
 
-abstract class MiniDetailState<T extends StatefulWidget> extends State<T> with StateMixin {
+abstract class MiniDetailState<T extends StatefulWidget> extends State<T>
+    with StateMixin {
   bool bottomOffstage = true;
   bool isEdited = false;
   // bool enableExit = true;
@@ -30,7 +31,8 @@ abstract class MiniDetailState<T extends StatefulWidget> extends State<T> with S
               bottom: 0,
               left: 0,
               right: 0,
-              child: Offstage(child: buildBottomOffstage(), offstage: bottomOffstage),
+              child: Offstage(
+                  child: buildBottomOffstage(), offstage: bottomOffstage),
             ),
             Positioned(
               left: 0,
@@ -43,8 +45,8 @@ abstract class MiniDetailState<T extends StatefulWidget> extends State<T> with S
         ),
         endDrawer: buildEndDrawer(),
         bottomNavigationBar: bottomOffstage ? buildBottomAppBar() : null,
-        floatingActionButton: bottomOffstage ? buildFloatingActionButton() : null,
-        resizeToAvoidBottomPadding: true,
+        floatingActionButton:
+            bottomOffstage ? buildFloatingActionButton() : null,
         backgroundColor: getBackgroundColor(),
       ),
       onWillPop: onSystemBack,
@@ -54,17 +56,14 @@ abstract class MiniDetailState<T extends StatefulWidget> extends State<T> with S
   BottomAppBar buildBottomAppBar() {
     Widget widget = buildNavigationButton();
     if (widget == null) return null;
-    return BottomAppBar(color: Theme
-        .of(context)
-        .bottomAppBarColor, child: widget, elevation: 0);
+    return BottomAppBar(
+        color: Theme.of(context).bottomAppBarColor,
+        child: widget,
+        elevation: 0);
   }
 
-  PreferredSizeWidget buildAppBar() =>
-      AppBar(
-        brightness: Theme
-            .of(context)
-            .appBarTheme
-            .brightness,
+  PreferredSizeWidget buildAppBar() => AppBar(
+        brightness: Theme.of(context).appBarTheme.brightness,
         centerTitle: centerTitle(),
         leading: buildLeading(),
         title: buildTitle() ?? Text(''),
@@ -99,10 +98,7 @@ abstract class MiniDetailState<T extends StatefulWidget> extends State<T> with S
   Widget buildFloatingActionButton() => null;
 
   @protected
-  Color getBackgroundColor() =>
-      Theme
-          .of(context)
-          .backgroundColor;
+  Color getBackgroundColor() => Theme.of(context).backgroundColor;
 
   @protected
   Future<bool> onSystemBack() async {

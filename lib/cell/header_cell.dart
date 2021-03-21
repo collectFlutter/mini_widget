@@ -19,8 +19,14 @@ Widget buildHeaderCell(
     BuildContext context,
     VoidCallback onMoreTop,
     VoidCallback onMoreLongPress}) {
-  textStyle = textStyle != null ? textStyle : TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
-  textStyle2 = textStyle2 != null ? textStyle2 : onMoreTop == null ? MiniStyle.textNormal : MiniStyle.textUrl;
+  textStyle = textStyle != null
+      ? textStyle
+      : TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
+  textStyle2 = textStyle2 != null
+      ? textStyle2
+      : onMoreTop == null
+          ? MiniStyle.textNormal
+          : MiniStyle.textUrl;
   return Padding(
     padding: padding ?? EdgeInsets.all(10),
     child: Stack(
@@ -38,9 +44,11 @@ Widget buildHeaderCell(
                   : Container()),
         ),
         Container(
-            padding: EdgeInsets.only(left: (imagePath == null && ledging == null) ? 0 : 30),
+            padding: EdgeInsets.only(
+                left: (imagePath == null && ledging == null) ? 0 : 30),
             alignment: Alignment.centerLeft,
-            child: Text(title ?? '', style: textStyle, overflow: TextOverflow.ellipsis)),
+            child: Text(title ?? '',
+                style: textStyle, overflow: TextOverflow.ellipsis)),
         Container(
           padding: EdgeInsets.only(left: 5),
           alignment: Alignment.centerRight,
@@ -77,13 +85,16 @@ Widget buildListMoreCell(
         child: Text.rich(
           TextSpan(children: [
             TextSpan(text: '$title (', style: MiniStyle.textTitle),
-            TextSpan(text: '$allSize', style: MiniStyle.textTitle.copyWith(color: MiniColor.deepPink)),
+            TextSpan(
+                text: '$allSize',
+                style: MiniStyle.textTitle.copyWith(color: MiniColor.deepPink)),
             TextSpan(text: ')', style: MiniStyle.textTitle),
           ]),
         ),
       ),
       GestureDetector(
-        child: Text((allSize > size && size > -1) ? moreText : '', style: MiniStyle.textUrl),
+        child: Text((allSize > size && size > -1) ? moreText : '',
+            style: MiniStyle.textUrl),
         onTap: onMoreTop,
         onLongPress: onLongPress,
       ),
@@ -141,7 +152,11 @@ Widget buildHeadCardCell(
                 }
                 if (data is EditValueModel) {
                   data.tagWidth = tagWidth;
-                  return Container(child: buildEditCell(data: data, minHeight: miniHeight, padding: valuePadding));
+                  return Container(
+                      child: buildEditCell(
+                          data: data,
+                          minHeight: miniHeight,
+                          padding: valuePadding));
                 }
                 if (data is Widget) {
                   return data;

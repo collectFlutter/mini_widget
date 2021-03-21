@@ -60,7 +60,9 @@ buildEditCell({
                   minHeight: minHeight,
                 ),
         ),
-        data.showLine ? Divider(height: 1, color: Colors.grey[80]) : Container(height: 0),
+        data.showLine
+            ? Divider(height: 1, color: Colors.grey[80])
+            : Container(height: 0),
       ],
     ),
   );
@@ -110,7 +112,9 @@ _buildTwoItem(
                 style: TextStyle(color: tagColor, height: 1.1),
               ),
               flex: 1),
-          required ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red) : Container(),
+          required
+              ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red)
+              : Container(),
         ],
       ),
     ),
@@ -152,7 +156,9 @@ _buildTwoItem(
                 style: TextStyle(color: tagColor2, height: 1.1),
               ),
               flex: 1),
-          required2 ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red) : Container(),
+          required2
+              ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red)
+              : Container(),
         ],
       ),
     ),
@@ -217,7 +223,9 @@ _buildOneItem(
                   style: TextStyle(color: tagColor, height: 1.1),
                 ),
                 flex: 1),
-            required ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red) : Container(),
+            required
+                ? Icon(MdiIcons.multiplication, size: 8, color: Colors.red)
+                : Container(),
           ],
         ),
       ),
@@ -251,7 +259,8 @@ _getInputFormatter(TextInputType keyboardType) {
   if (keyboardType == TextInputType.numberWithOptions(decimal: true)) {
     return [UsNumberTextInputFormatter()];
   }
-  if (keyboardType == TextInputType.number || keyboardType == TextInputType.phone) {
+  if (keyboardType == TextInputType.number ||
+      keyboardType == TextInputType.phone) {
     return [WhitelistingTextInputFormatter.digitsOnly];
   }
   return null;

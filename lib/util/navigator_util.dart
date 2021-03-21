@@ -17,14 +17,13 @@ import '../page/scrawl_Location_page.dart';
 import 'widget_util.dart';
 
 class MiniNavigatorUtil {
-  static Future<dynamic> pushPage(BuildContext context, Widget page, {String pageName}) async {
+  static Future<dynamic> pushPage(BuildContext context, Widget page,
+      {String pageName}) async {
     assert(context != null && page != null);
     FocusScope.of(context).requestFocus(FocusNode());
-    var result = await Navigator.push(context, CupertinoPageRoute(builder: (ctx) => page));
+    var result = await Navigator.push(
+        context, CupertinoPageRoute(builder: (ctx) => page));
     return result;
-    // return false;
-    // if (context == null || page == null) return null;
-    // return Navigator.push(context, new CupertinoPageRoute(builder: (ctx) => page));
   }
 
   static void pop(BuildContext context, {bool success}) {
@@ -39,7 +38,8 @@ class MiniNavigatorUtil {
   }
 
   static Future<dynamic> pushReplacement(BuildContext context, Widget page) {
-    return Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx) => page));
+    return Navigator.of(context)
+        .pushReplacement(CupertinoPageRoute(builder: (ctx) => page));
   }
 
   static void pushWeb(BuildContext context,
@@ -51,11 +51,8 @@ class MiniNavigatorUtil {
       Navigator.push(
         context,
         new CupertinoPageRoute<void>(
-          builder: (ctx) => WebViewPage(
-            title: title,
-            titleId: titleId,
-            url: url,
-          ),
+          builder: (ctx) =>
+              WebViewPage(title: title, titleId: titleId, url: url),
         ),
       );
     }
@@ -70,15 +67,17 @@ class MiniNavigatorUtil {
   }
 
   /// 选择后涂鸦
-  static Future<String> getImageAndScrawl(BuildContext context, {bool hasScrawl = true}) async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  static Future<String> getImageAndScrawl(BuildContext context,
+      {bool hasScrawl = true}) async {
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
     if (image == null) return null;
     showLoadingDialog(context);
     File compressFile1 = await FileUtil.compressWithFile(image.path);
     Rect rect = await WidgetUtil.getImageWH(localUrl: compressFile1.path);
     double w = rect.width;
     double h = rect.height;
-    File compressFile = await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
+    File compressFile =
+        await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
     Navigator.pop(context);
     if (!hasScrawl) return compressFile.path;
 
@@ -88,9 +87,12 @@ class MiniNavigatorUtil {
 
   /// 拍照+涂鸦(位置信息)
   static Future<String> cameraImageAndScrawl(BuildContext context,
-      {bool hasScrawl = true, String appName, String authorName, Widget appLogo}) async {
+      {bool hasScrawl = true,
+      String appName,
+      String authorName,
+      Widget appLogo}) async {
     if (await Permission.camera.request().isGranted) {
-      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      var image = await ImagePicker().getImage(source: ImageSource.camera);
       if (image == null) return null;
       showLoadingDialog(context);
       print('图片路径${image.path}');
@@ -98,7 +100,8 @@ class MiniNavigatorUtil {
       Rect rect = await WidgetUtil.getImageWH(localUrl: compressFile1.path);
       double w = rect.width;
       double h = rect.height;
-      File compressFile = await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
+      File compressFile =
+          await FileUtil.compressWithFile(image.path, rotate: w > h ? 90 : 0);
       print('压缩后路径：${compressFile.path}');
       Navigator.pop(context);
       if (!hasScrawl) return compressFile.path;
@@ -122,7 +125,7 @@ class MiniNavigatorUtil {
             appName: miniGlobal?.appName,
             authorName: miniGlobal?.userName,
             appLogo: miniGlobal?.appLogo));
-    print("文件路径：${scrawlImage}");
+    print("文件路径：$scrawlImage");
     return scrawlImage;
   }
 }

@@ -22,31 +22,35 @@ abstract class MiniListState<T extends StatefulWidget, M> extends State<T>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return WillPopScope(child: Material(
-      color: getBackgroundColor(),
-      child: Container(
-        child: EasyRefresh(
-          firstRefresh: firstRefresh(),
-          emptyWidget: showEmptyWidget
-              ? EmptyWidget(
-              emptyImageAsset: getEmptyImageAsset(), emptyMessage: getEmptyMessage(), child: getEmptyChild())
-              : list.length == 0
-              ? LoadingListWidget(
-              itemChild: getLoadingChild(),
-              baseColor: getLoadingBaseColor(),
-              highlightColor: getLoadingHighlightColor())
-              : null,
-          child: ListView.builder(
-            controller: ScrollController(),
-            shrinkWrap: true,
-            itemCount: list.length,
-            itemBuilder: (ctx, index) => buildItemCell(ctx, list[index], index),
+    return WillPopScope(
+      child: Material(
+        color: getBackgroundColor(),
+        child: Container(
+          child: EasyRefresh(
+            firstRefresh: firstRefresh(),
+            emptyWidget: showEmptyWidget
+                ? EmptyWidget(
+                    emptyImageAsset: getEmptyImageAsset(),
+                    emptyMessage: getEmptyMessage(),
+                    child: getEmptyChild())
+                : list.length == 0
+                    ? LoadingListWidget(
+                        itemChild: getLoadingChild(),
+                        baseColor: getLoadingBaseColor(),
+                        highlightColor: getLoadingHighlightColor())
+                    : null,
+            child: ListView.builder(
+              controller: ScrollController(),
+              shrinkWrap: true,
+              itemCount: list.length,
+              itemBuilder: (ctx, index) =>
+                  buildItemCell(ctx, list[index], index),
+            ),
+            onRefresh: hasRefresh() ? () => fetchData(false) : null,
+            onLoad: hasMore() ? () => fetchData(true) : null,
           ),
-          onRefresh: hasRefresh() ? () => fetchData(false) : null,
-          onLoad: hasMore() ? () => fetchData(true) : null,
         ),
       ),
-    ),
       onWillPop: onSystemBack,
     );
   }
@@ -69,10 +73,7 @@ abstract class MiniListState<T extends StatefulWidget, M> extends State<T>
 
   bool hasMore() => true;
 
-  Color getBackgroundColor() =>
-      Theme
-          .of(context)
-          .backgroundColor;
+  Color getBackgroundColor() => Theme.of(context).backgroundColor;
 
   fetchData(bool more) async {
     if (more) {

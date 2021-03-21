@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// 国际化（搜索）
-class CustomLocalizationDelegate extends LocalizationsDelegate<MaterialLocalizations> {
+class CustomLocalizationDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
   const CustomLocalizationDelegate();
 
   @override

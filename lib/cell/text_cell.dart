@@ -96,7 +96,7 @@ _buildOneLine(
   bool flag = false;
   String url = '';
   IconData iconData;
-  if(clip) iconData = Icons.content_copy;
+  if (clip) iconData = Icons.content_copy;
   if (inputType == TextInputType.phone) {
     flag = true;
     url = 'tel:$value';
@@ -136,15 +136,19 @@ _buildOneLine(
                     Expanded(
                       child: Text(
                         value ?? '',
-                        overflow: valueMaxLines == 1 ? TextOverflow.ellipsis : null,
+                        overflow:
+                            valueMaxLines == 1 ? TextOverflow.ellipsis : null,
                         maxLines: valueMaxLines,
                         style: TextStyle(
                             height: 1.1,
                             fontSize: fontSize,
-                            color: valueColor ?? (flag ? MiniColor.primary : MiniColor.black)),
+                            color: valueColor ??
+                                (flag ? MiniColor.primary : MiniColor.black)),
                       ),
                     ),
-                    iconData!=null? Icon(iconData, size: 12,color: Colors.blue) : Container()
+                    iconData != null
+                        ? Icon(iconData, size: 12, color: Colors.blue)
+                        : Container()
                   ],
                 ),
                 onTap: () {

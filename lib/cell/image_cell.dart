@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_tools/mini_tools.dart';
 import 'package:mini_widget/bean/image_label_model.dart';
@@ -19,14 +19,16 @@ Widget buildImageCell(
     child: StringUtil.isEmpty(path)
         ? errorWidget
         : UrlUtil.isUrl(path)
-            ? CachedNetworkImage(
-                height: height,
+            ? Image.network(
+                path ?? '',
+                errorBuilder: (ctx, _, __) => errorWidget,
+                loadingBuilder: (ctx, _, __) => placeholder,
                 width: width,
-                imageUrl: path ?? '',
+                height: height,
                 fit: BoxFit.cover,
-                placeholder: (ctx, url) => placeholder ?? null,
-                errorWidget: (ctx, url, error) => errorWidget ?? null)
-            : Image.asset(path, width: width, height: height, fit: BoxFit.cover),
+              )
+            : Image.asset(path,
+                width: width, height: height, fit: BoxFit.cover),
   );
 }
 

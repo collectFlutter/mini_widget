@@ -19,7 +19,8 @@ void showMassageDialog(BuildContext context, String content,
       content: Container(
         alignment: left ? Alignment.centerLeft : Alignment.center,
         padding: EdgeInsets.only(top: 10),
-        child: buildSearchSpan(content ?? '', colorContent ?? '', style: TextStyle(height: 1.5, color: Colors.black)),
+        child: buildSearchSpan(content ?? '', colorContent ?? '',
+            style: TextStyle(height: 1.5, color: Colors.black)),
       ),
       actions: <Widget>[
         CupertinoButton(
@@ -32,7 +33,8 @@ void showMassageDialog(BuildContext context, String content,
           },
         ),
         CupertinoButton(
-          child: Text(okText ?? "确认", style: TextStyle(color: MiniColor.warnColor)),
+          child: Text(okText ?? "确认",
+              style: TextStyle(color: MiniColor.warnColor)),
           onPressed: () {
             Navigator.of(context).pop();
             if (onOkPressed != null) onOkPressed();
