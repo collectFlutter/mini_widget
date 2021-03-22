@@ -195,9 +195,9 @@ Widget buildTimeLineCell(
                 padding: EdgeInsets.only(top: 10),
                 child: Column(
                   children: <Widget>[
-                    Text(getTimeStr(dealTime), style: MiniStyle.textTitle),
+                    Text(dealTime.getTimeStr(), style: MiniStyle.textTitle),
                     SizedBox(height: 5),
-                    Text(getDateStr(dealTime), style: MiniStyle.textTag),
+                    Text(dealTime.getDateStr(), style: MiniStyle.textTag),
                   ],
                 ),
               ),
