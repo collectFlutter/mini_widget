@@ -18,9 +18,6 @@ export 'widget/a.dart';
 export 'tools.dart';
 export 'typedef.dart';
 
-export 'package:mini_tools/mini_tools.dart';
-export 'package:mini_logger/mini_logger.dart';
-
 class MiniWidget {
   /// 初始化参数 <br/>
   /// [appName] - 应用名称 <br/>
