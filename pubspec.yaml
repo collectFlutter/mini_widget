@@ -1,7 +1,7 @@
 name: mini_widget
 description: Flutter base component package, For example InkCell, BlocProvider, etc.
 version: 2.0.0
-repository: https://github.com/collectFlutter/mini_widget
+repository: https://github.com/collectFlutter/mini_widget/tree/null-safety
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cached_network_image: ^3.2.3
   easy_refresh: ^3.3.2+1
   fluro: ^2.0.5
   flutter_lints: ^2.0.0

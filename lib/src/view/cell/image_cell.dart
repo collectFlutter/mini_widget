@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../util/url_util.dart';
 
@@ -29,16 +28,16 @@ class ImageCell extends StatelessWidget {
       child: (path == null || path!.isEmpty)
           ? (errorWidget ?? Container())
           : UrlUtil.isUrl(path!)
-              ? CachedNetworkImage(
+              ? Image.network(
+                  path!,
                   height: height,
                   width: width,
-                  imageUrl: path!,
-                  fit: BoxFit.cover,
-                  placeholder:
-                      placeholder != null ? (ctx, url) => placeholder! : null,
-                  errorWidget: errorWidget != null
-                      ? (ctx, url, error) => errorWidget!
-                      : null)
+                  loadingBuilder:
+                      placeholder == null ? null : (ctx, w, e) => placeholder!,
+                  errorBuilder: errorWidget == null
+                      ? null
+                      : (ctx, url, error) => errorWidget!,
+                )
               : Image.asset(
                   path!,
                   width: width,
