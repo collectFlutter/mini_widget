@@ -1,3 +1,10 @@
+## 3.0.1
+
+`2023-10-08`
+
+- add extension#getDateStr()、extension#getTimeStr()
+- add search_cell、time_line_cell
+
 ## 3.0.0
 
 `2023-09-12`

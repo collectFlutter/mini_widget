@@ -11,6 +11,8 @@ export 'image_label_cell.dart';
 export 'ink_cell.dart';
 export 'line_cell.dart';
 export 'material_button_cell.dart';
+export 'search_cell.dart';
 export 'tag_edit_cell.dart';
 export 'tag_select_cell.dart';
 export 'tag_value_cell.dart';
+export 'time_line_cell.dart';

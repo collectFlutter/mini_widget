@@ -39,6 +39,17 @@ extension StringExtension on String {
     String regStr = "(?=.*${keys.join(')(?=.*')})".toLowerCase();
     return toLowerCase().contains(RegExp(regStr));
   }
+
+  String getDateStr() {
+    if (length > 10) return substring(0, 10).replaceAll("/", "-");
+    return this;
+  }
+
+  String getTimeStr() {
+    if (length > 16) return substring(11, 16);
+    return this;
+  }
+
 }
 
 extension DateTimeExtension on DateTime {
