@@ -152,4 +152,26 @@ mixin StateMixin<T extends StatefulWidget> on State<T> {
       );
 
   double getMaxWidth() => MediaQuery.of(context).size.width;
+
+  Widget buildButton({
+    Function()? onPressed,
+    Widget? child,
+    String? text,
+    Color? textColor,
+    Color? color,
+  }) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(color),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: DefaultTextStyle(
+          style: TextStyle(color: textColor, fontSize: 16),
+          child: child ?? Text(text ?? ''),
+        ),
+      ),
+    );
+  }
 }

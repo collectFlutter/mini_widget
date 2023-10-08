@@ -49,7 +49,6 @@ extension StringExtension on String {
     if (length > 16) return substring(11, 16);
     return this;
   }
-
 }
 
 extension DateTimeExtension on DateTime {
