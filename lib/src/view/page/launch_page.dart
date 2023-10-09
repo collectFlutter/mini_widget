@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import '../base/_.dart';
 
 import '../../util/url_util.dart';
-
-import '../base/mixin_state.dart';
 
 /// 启动图封装
 class LaunchPage extends StatefulWidget {
@@ -26,26 +25,32 @@ class LaunchPage extends StatefulWidget {
   State createState() => _LaunchPageState();
 }
 
-class _LaunchPageState extends State<LaunchPage> with StateMixin<LaunchPage> {
+class _LaunchPageState extends MiniDetailState<LaunchPage> {
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: AnimatedOpacity(
-        opacity: 1.0,
-        duration: widget.splashTimes,
-        child: UrlUtil.isUrl(widget.launchBackgroundPath)
-            ? Image.network(widget.launchBackgroundPath,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: double.infinity)
-            : Image.asset(widget.launchBackgroundPath,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: double.infinity),
-        onEnd: () {
-          widget.endCallback(context);
-        },
-      ),
+  void afterBuild(Duration timestamp) {
+    Future.delayed(widget.splashTimes).then((value) {
+      print('end');
+      widget.endCallback(context);
+    });
+  }
+
+  @override
+  Widget? buildBody() {
+    return AnimatedOpacity(
+      opacity: 1,
+      duration: widget.splashTimes,
+      child: UrlUtil.isUrl(widget.launchBackgroundPath)
+          ? Image.network(widget.launchBackgroundPath,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              height: double.infinity)
+          : Image.asset(widget.launchBackgroundPath,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              height: double.infinity),
     );
   }
+
+  @override
+  Widget? buildTitle() => null;
 }

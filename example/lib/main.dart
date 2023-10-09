@@ -1,4 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
+import 'package:mini_widget/mini_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      routes: {
+        "home": (ctx) => const MyHomePage(title: 'mini widget'),
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +37,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LaunchPage(
+        endCallback: (BuildContext value) {
+          Navigator.of(value).popAndPushNamed('home');
+        },
+        launchBackgroundPath:
+            'https://img.zcool.cn/community/01b51058c8dba8a801219c77913ba8.png@1280w_1l_2o_100sh.png',
+      ),
     );
   }
 }
