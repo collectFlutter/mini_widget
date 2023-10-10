@@ -29,7 +29,6 @@ class _LaunchPageState extends MiniDetailState<LaunchPage> {
   @override
   void afterBuild(Duration timestamp) {
     Future.delayed(widget.splashTimes).then((value) {
-      print('end');
       widget.endCallback(context);
     });
   }

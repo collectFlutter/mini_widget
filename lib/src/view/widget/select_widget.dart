@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../util/a.dart';
+import '../../util/_.dart';
 import '../res/colors.dart';
 import '../res/dimens.dart';
 import '../typedef.dart';
