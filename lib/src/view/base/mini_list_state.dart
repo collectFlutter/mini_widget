@@ -139,10 +139,9 @@ abstract class MiniListState<T extends StatefulWidget, M> extends State<T>
 
   @override
   void afterBuild(Duration timestamp) {
-    _controller.callRefresh();
-    // if (!hasRefresh()) {
-    //   fetchData(false);
-    // }
+    if (hasRefresh() && firstRefresh()) {
+      fetchData(false);
+    }
   }
 
   @override

@@ -113,8 +113,16 @@ class DateUtil {
     String? timeSeparate,
     bool? isUtc,
   }) {
-    return getDateStrByDateTime(getDateTime(dateStr, isUtc: isUtc),
-        format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
+    DateTime? time = getDateTime(dateStr, isUtc: isUtc);
+    if (time == null) {
+      return null;
+    }
+    return getDateStrByDateTime(
+      time,
+      format: format,
+      dateSeparate: dateSeparate,
+      timeSeparate: timeSeparate,
+    );
   }
 
   /// get DateStr By Milliseconds.
@@ -137,11 +145,10 @@ class DateUtil {
   /// format          DateFormat type.
   /// dateSeparate    date separate.
   /// timeSeparate    time separate.
-  static String? getDateStrByDateTime(DateTime? dateTime,
+  static String getDateStrByDateTime(DateTime dateTime,
       {DateFormat format = DateFormat.NORMAL,
       String? dateSeparate,
       String? timeSeparate}) {
-    if (dateTime == null) return null;
     String dateStr = dateTime.toString();
     if (isZHFormat(format)) {
       dateStr = formatZHDateTime(dateStr, format, timeSeparate);

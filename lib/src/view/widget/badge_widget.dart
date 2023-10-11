@@ -1,16 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
 class BadgeWidget extends StatelessWidget {
+  final Widget child;
+  final int? count;
+  final bool flag;
+  final double fontSize;
+  final double? positionTop;
+  final double? positionRight;
+  final double? positionLeft;
+  final double? positionBottom;
+
+  const BadgeWidget(
+      {super.key,
+      this.count,
+      this.flag = false,
+      this.fontSize = 14,
+      required this.child,
+      this.positionTop,
+      this.positionRight,
+      this.positionLeft,
+      this.positionBottom});
+
+  @override
+  Widget build(BuildContext context) {
+    return badges.Badge(
+      position: badges.BadgePosition.custom(
+        start: positionLeft,
+        end: positionRight,
+        top: positionTop,
+        bottom: positionBottom,
+      ),
+      badgeContent: BadgeTipWidget(
+        count: count ?? 0,
+        flag: flag,
+        fontSize: fontSize,
+      ),
+      child: child,
+    );
+  }
+}
+
+/// 顶部提示组件
+class BadgeTipWidget extends StatelessWidget {
   final int count;
   final bool flag;
   final double fontSize;
 
-  const BadgeWidget(
+  const BadgeTipWidget(
       {Key? key, this.count = 0, this.flag = false, this.fontSize = 14})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (count < 1 && !flag) return Container();
     return Container(
       decoration: const BoxDecoration(
         color: Colors.red,

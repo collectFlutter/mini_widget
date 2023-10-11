@@ -63,7 +63,7 @@ class ImageLabelCell extends StatelessWidget {
                       Positioned(
                         right: count < 10 ? 13 : (count < 100 ? 10 : 5),
                         top: 0,
-                        child: BadgeWidget(count: count, flag: flag),
+                        child: BadgeTipWidget(count: count, flag: flag),
                       ),
                     },
                   ],

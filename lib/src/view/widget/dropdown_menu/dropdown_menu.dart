@@ -17,7 +17,7 @@ enum DropdownMenuShowHideSwitchStyle {
   animationShowUntilAnimationHideComplete,
 }
 
-class DropdownMenu extends DropdownWidget {
+class MiniDropdownMenu extends DropdownWidget {
   /// menus whant to show
   final List<DropdownMenuBuilder> menus;
 
@@ -37,7 +37,7 @@ class DropdownMenu extends DropdownWidget {
 
   final double? maxMenuHeight;
 
-  const DropdownMenu(
+  const MiniDropdownMenu(
       {required this.menus,
       super.controller,
       Duration? hideDuration,
@@ -56,7 +56,7 @@ class DropdownMenu extends DropdownWidget {
         hideCurve = hideCurve ?? Curves.fastOutSlowIn;
 
   @override
-  DropdownState<DropdownMenu> createState() {
+  DropdownState<MiniDropdownMenu> createState() {
     return _DropdownMenuState();
   }
 }
@@ -105,7 +105,7 @@ class SizeClipper extends CustomClipper<Rect> {
   }
 }
 
-class _DropdownMenuState extends DropdownState<DropdownMenu>
+class _DropdownMenuState extends DropdownState<MiniDropdownMenu>
     with TickerProviderStateMixin {
   late List<_DropdownAnimation> _dropdownAnimations;
   bool _show = false;
@@ -152,7 +152,7 @@ class _DropdownMenuState extends DropdownState<DropdownMenu>
   }
 
   @override
-  void didUpdateWidget(DropdownMenu oldWidget) {
+  void didUpdateWidget(MiniDropdownMenu oldWidget) {
     //update state
     _updateHeights();
     super.didUpdateWidget(oldWidget);
