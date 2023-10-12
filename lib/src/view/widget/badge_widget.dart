@@ -13,7 +13,7 @@ class BadgeWidget extends StatelessWidget {
 
   const BadgeWidget(
       {super.key,
-      this.count,
+      this.count = 0,
       this.flag = false,
       this.fontSize = 14,
       required this.child,
@@ -24,6 +24,9 @@ class BadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!flag && count == null) {
+      return child;
+    }
     return badges.Badge(
       position: badges.BadgePosition.custom(
         start: positionLeft,
@@ -31,10 +34,12 @@ class BadgeWidget extends StatelessWidget {
         top: positionTop,
         bottom: positionBottom,
       ),
-      badgeContent: BadgeTipWidget(
-        count: count ?? 0,
-        flag: flag,
-        fontSize: fontSize,
+      badgeContent: Text(
+        flag ? '!' : (count! > 99 ? '99+' : '$count'),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: fontSize,
+        ),
       ),
       child: child,
     );
