@@ -266,7 +266,7 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader>
             SizedBox(
               width: 50,
               height: widget.height,
-              child: const Icon(Icons.swap_vert),
+              child: Icon(Icons.swap_vert,color: widget.iconColor),
             ),
             if (index != widget.items.length - 1) ...{
               Container(

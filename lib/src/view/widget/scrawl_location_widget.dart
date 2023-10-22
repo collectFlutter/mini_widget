@@ -81,11 +81,6 @@ class ScrawlWithLocationState extends State<ScrawlWithLocationWidget>
         StringUtil.isEmpty(widget.filePath) ? null : File(widget.filePath);
   }
 
-  @override
-  void afterBuild(Duration timestamp) async {
-    super.afterBuild(timestamp);
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {

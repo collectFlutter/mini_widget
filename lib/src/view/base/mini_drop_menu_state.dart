@@ -42,7 +42,7 @@ abstract class MiniDropMenuState<T extends StatefulWidget>
   double getDownHeight(index) => getMaxWidth() * 1.1;
 
   Widget buildMenuBody() {
-    var headers = initMenuHeaders();
+    // var headers = _menuHeaders;
     return Stack(
       key: _stackKey,
       children: [
@@ -50,7 +50,7 @@ abstract class MiniDropMenuState<T extends StatefulWidget>
           children: [
             GZXDropDownHeader(
               // 下拉的头部项，目前每一项，只能自定义显示的文字、图标、图标大小修改
-              items: headers,
+              items: _menuHeaders,
               // GZXDropDownHeader对应第一父级Stack的key
               stackKey: _stackKey,
               // controller用于控制menu的显示或隐藏
@@ -62,7 +62,7 @@ abstract class MiniDropMenuState<T extends StatefulWidget>
               // height: 55,
               // 头部背景颜色
               // color: Colors.red,
-              color: const Color(0xffe5ecf8),
+              color: getBackgroundColor(),
               // 头部边框宽度
               // borderWidth: 1,
               // 头部边框颜色
@@ -104,7 +104,7 @@ abstract class MiniDropMenuState<T extends StatefulWidget>
             setState(() {});
           },
           // 下拉菜单，高度自定义，你想显示什么就显示什么，完全由你决定，你只需要在选择后调用_dropdownMenuController.hide();即可
-          menus: List.generate(headers.length, (index) {
+          menus: List.generate(_menuHeaders.length, (index) {
             return GZXDropdownMenuBuilder(
               dropDownHeight: getDownHeight(index),
               dropDownWidget: getMenuWidget(index),
